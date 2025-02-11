@@ -13,4 +13,6 @@
 
 ## Netlify
 
-Приложение доступно по следующей ссылке -
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0eda1ef2-c6ca-490f-8efe-34e97015e475/deploy-status)](https://app.netlify.com/sites/beamish-swan-9b6647/deploys)
+
+Приложение доступно по следующей ссылке - https://beamish-swan-9b6647.netlify.app/
