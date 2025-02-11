@@ -1,0 +1,19 @@
+.button {
+  color: var(--colorWhitePrimary);
+  background: var(--colorBrandPrimary);
+  padding: var(--spacing4x) var(--spacing10x);
+  border-radius: var(--borderRadiusXs);
+}
+
+.buttonFull {
+  width: 100%;
+}
+
+.buttonRound {
+  border-radius: var(--borderRadiusFull);
+}
+
+.buttonDanger {
+  background: var(--colorDangerPrimary);
+  color: var(--colorWhitePrimary);
+}
