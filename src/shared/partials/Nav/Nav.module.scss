@@ -1,0 +1,13 @@
+.nav {
+  display: flex;
+  position: fixed;
+  background: var(--colorWhitePrimary);
+  z-index: 100;
+  bottom: var(--spacing10x);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--spacing6x) var(--spacing8x);
+  gap: var(--spacing6x);
+  border-radius: var(--borderRadiusS);
+  box-shadow: var(--shadowS);
+}

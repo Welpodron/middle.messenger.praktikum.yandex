@@ -1,0 +1,16 @@
+.aside {
+  padding: var(--spacing6x);
+  background: var(--colorWhiteSecondary);
+  display: grid;
+  grid-template-rows: repeat(2, min-content) 1fr;
+  gap: var(--spacing6x);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.list {
+  display: grid;
+}

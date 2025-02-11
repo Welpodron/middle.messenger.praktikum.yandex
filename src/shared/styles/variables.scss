@@ -1,0 +1,45 @@
+:root {
+  /* colors */
+  --colorBrandPrimary: #007bff;
+  --colorWhitePrimary: #ffffff;
+  --colorWhiteSecondary: #fbfbfb;
+  --colorGreyPrimary: #999999;
+  --colorGreySecondary: #efefef;
+  --colorBlackPrimary: #000000;
+  --colorDangerPrimary: #ff0000;
+  --colorErrorPrimary: #ff2f2f;
+  /* shadows */
+  --shadowS: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* spacing */
+  --spacing0x: 0px;
+  --spacing1x: 2px;
+  --spacing2x: 4px;
+  --spacing3x: 6px;
+  --spacing4x: 8px;
+  --spacing6x: 12px;
+  --spacing8x: 16px;
+  --spacing10x: 20px;
+  --spacing12x: 24px;
+  --spacing16x: 32px;
+  --spacing20x: 40px;
+  --spacing24x: 48px;
+  --spacing32x: 64px;
+  --spacing40x: 80px;
+  --spacing60x: 120px;
+  /* border-radius */
+  --borderRadiusXxs: 4px;
+  --borderRadiusXs: 8px;
+  --borderRadiusS: 12px;
+  --borderRadiusM: 16px;
+  --borderRadiusL: 20px;
+  --borderRadiusXl: 24px;
+  --borderRadiusXxl: 32px;
+  --borderRadiusFull: 50%;
+  /* typography */
+  --fontSizeXs: 14px;
+  --fontSizeS: 16px;
+  --fontSizeM: 18px;
+  --fontSizeL: 20px;
+  --fontSizeXl: 32px;
+  --fontSizeXxl: 42px;
+}

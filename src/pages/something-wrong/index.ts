@@ -1,0 +1,1 @@
+export { SomethingWrong } from "./SomethingWrong";
