@@ -11,8 +11,6 @@ import Nav from "./Nav";
 import Chats from "./Chats";
 import Chatter from "./Chatter";
 
-import UserInfo from "./UserInfo";
-
 export default {
   Link,
   Button,
@@ -23,5 +21,4 @@ export default {
   Nav,
   Chats,
   Chatter,
-  UserInfo,
 };

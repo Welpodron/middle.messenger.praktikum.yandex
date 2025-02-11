@@ -1,1 +1,1 @@
-export { default } from './Input.hbs';
+export { default } from "./Input.hbs";
