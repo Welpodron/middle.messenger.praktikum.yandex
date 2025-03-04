@@ -1,0 +1,13 @@
+node_modules
+# Странный баг в github actions https://github.com/vitejs/vite/discussions/15532?ysclid=m709p7ow4n118167141
+package-lock.json
+dist
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
