@@ -1,0 +1,9 @@
+.messages {
+  display: grid;
+  gap: var(--spacing6x);
+}
+
+.message {
+  display: grid;
+  justify-items: start;
+}

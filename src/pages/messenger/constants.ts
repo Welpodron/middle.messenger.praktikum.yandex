@@ -1,1 +1,1 @@
-export const PAGE_TITLE = "Мессенджер";
+export const PAGE_TITLE = 'Мессенджер';
