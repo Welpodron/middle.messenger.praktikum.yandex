@@ -1,0 +1,23 @@
+.aside {
+  background: var(--colorWhiteSecondary);
+  display: grid;
+  grid-template-rows: 77px 64px calc(100vh - 141px);
+  max-height: 100vh;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing6x);
+}
+
+.tools {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing6x);
+}
+
+.buttonCreateChat {
+  padding: var(--spacing4x);
+}

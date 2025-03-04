@@ -6,6 +6,8 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
 
+    "sourceMap": true,
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -14,11 +16,16 @@
     "noEmit": true,
 
     /* Linting */
+    // strict уже включает: noImplicitAny, strictNullChecks, но правила добавлены для автотестов
     "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+
+    // TODO: Добавить поддержку paths, т.к уже становится кринж использовать огромные относительные пути
 
     "types": ["vite/client"]
   },
