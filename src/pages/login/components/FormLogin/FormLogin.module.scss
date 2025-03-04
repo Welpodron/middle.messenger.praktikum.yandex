@@ -1,0 +1,9 @@
+@use "../../../../shared/styles/mixins.scss" as *;
+
+.form {
+  @include formCard;
+}
+
+.actions {
+  @include formCardActions;
+}

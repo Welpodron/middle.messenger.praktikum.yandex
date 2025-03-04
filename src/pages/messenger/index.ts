@@ -1,1 +1,2 @@
-export { Messenger } from "./Messenger";
+export { Messenger } from './Messenger.component';
+export * from './types';

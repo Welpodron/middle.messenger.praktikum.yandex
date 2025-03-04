@@ -1,0 +1,11 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing1x);
+}
+
+.label {
+  color: var(--colorGreyPrimary);
+  font-size: var(--fontSizeXs);
+  text-align: left;
+}

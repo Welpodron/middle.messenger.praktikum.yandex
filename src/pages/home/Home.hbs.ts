@@ -1,4 +1,4 @@
-import classNames from "./Home.module.scss";
+import classNames from './Home.module.scss';
 
 export default `
 <main class="centered ${classNames.page}">
@@ -6,6 +6,6 @@ export default `
         <h1>{{title}}</h1>
         <p>{{description}}</p>
     </div>
-    {{> Nav links=links}}
+    {{{Nav}}}
 </main>
 `;

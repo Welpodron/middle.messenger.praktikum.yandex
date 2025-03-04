@@ -1,0 +1,25 @@
+.chat {
+  display: flex;
+}
+
+.chats {
+  display: grid;
+  gap: var(--spacing2x);
+  overflow: hidden auto;
+  max-height: 100%;
+
+  &::-webkit-scrollbar {
+    background: transparent;
+    width: var(--spacing4x);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--colorGreySecondary);
+    border-radius: var(--borderRadiusXs);
+  }
+}
+
+.empty {
+  font-weight: 600;
+  color: var(--colorGreyPrimary);
+}

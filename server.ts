@@ -1,13 +1,13 @@
-import express, { type Express } from "express";
+import express, { type Express } from 'express';
 
 const PORT = 3000;
 
 const app: Express = express();
 
-app.use(express.static("./dist"));
+app.use(express.static('./dist'));
 
-app.get("*", (_req, res) => {
-  res.sendFile("index.html", { root: "./dist" });
+app.get('*', (_req, res) => {
+  res.sendFile('index.html', { root: './dist' });
 });
 
 app.listen(PORT, () => {

@@ -1,0 +1,18 @@
+.chatterBox {
+  display: grid;
+  max-height: 100vh;
+  height: 100vh;
+  grid-template-rows: max-content 1fr max-content;
+}
+
+.header {
+  padding: var(--spacing0x) var(--spacing10x);
+}
+
+.conversation {
+  padding: var(--spacing6x) var(--spacing10x);
+}
+
+.footer {
+  padding: var(--spacing0x) var(--spacing10x);
+}

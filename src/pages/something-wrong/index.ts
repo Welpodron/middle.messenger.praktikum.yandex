@@ -1,1 +1,2 @@
-export { SomethingWrong } from "./SomethingWrong";
+export { SomethingWrong } from './SomethingWrong.component';
+export * from './types';

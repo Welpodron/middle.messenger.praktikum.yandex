@@ -8,9 +8,13 @@
   --colorBlackPrimary: #000000;
   --colorDangerPrimary: #ff0000;
   --colorErrorPrimary: #ff2f2f;
+  --colorHighlightPrimary: #e4edfd;
+
   /* shadows */
   --shadowS: 0 0 10px rgba(0, 0, 0, 0.1);
+
   /* spacing */
+  --spacing1px: 1px;
   --spacing0x: 0px;
   --spacing1x: 2px;
   --spacing2x: 4px;
@@ -26,6 +30,7 @@
   --spacing32x: 64px;
   --spacing40x: 80px;
   --spacing60x: 120px;
+
   /* border-radius */
   --borderRadiusXxs: 4px;
   --borderRadiusXs: 8px;
@@ -35,7 +40,9 @@
   --borderRadiusXl: 24px;
   --borderRadiusXxl: 32px;
   --borderRadiusFull: 50%;
+
   /* typography */
+  --fontSizeXxs: 12px;
   --fontSizeXs: 14px;
   --fontSizeS: 16px;
   --fontSizeM: 18px;

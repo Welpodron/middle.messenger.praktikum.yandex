@@ -1,0 +1,23 @@
+.message {
+  font-size: var(--fontSizeXs);
+  padding: var(--spacing6x) var(--spacing6x) var(--spacing0x) var(--spacing6x);
+  background: var(--colorGreySecondary);
+  border-radius: var(--borderRadiusXs);
+  min-width: 140px;
+  max-width: 50%;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--spacing6x);
+  font-size: var(--fontSizeXxs);
+  color: var(--colorGreyPrimary);
+  margin-top: var(--spacing2x);
+}
+
+.messageMine {
+  justify-self: end;
+  background: var(--colorHighlightPrimary);
+}

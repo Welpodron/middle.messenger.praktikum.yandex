@@ -1,21 +1,3 @@
 .page {
   min-height: 100vh;
 }
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing10x);
-  padding: var(--spacing16x);
-  border-radius: var(--borderRadiusS);
-  box-shadow: var(--shadowS);
-  min-width: 340px;
-}
-
-.actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing4x);
-  margin-top: var(--spacing4x);
-}
