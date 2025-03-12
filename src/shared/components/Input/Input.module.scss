@@ -1,0 +1,11 @@
+.input {
+  color: var(--colorBlackPrimary);
+  background: transparent;
+  padding: var(--spacing3x) var(--spacing0x);
+  border-bottom: var(--spacing1x) solid var(--colorBrandPrimary);
+  min-width: 20px;
+
+  &::placeholder {
+    color: var(--colorGreyPrimary);
+  }
+}

@@ -8,15 +8,22 @@
   "license": "UNLICENSED",
   "type": "module",
   "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@stylistic/eslint-plugin": "^4.1.0",
+    "@stylistic/stylelint-config": "^2.0.0",
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.1",
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
+    "eslint": "^9.20.1",
     "express": "^4.21.2",
     "postcss-load-config": "^6.0.1",
     "sass": "^1.84.0",
+    "stylelint": "^16.14.1",
+    "stylelint-config-standard-scss": "^14.0.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.1",
     "vite": "^6.0.11"
   },
   "dependencies": {
@@ -30,6 +37,10 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "vite build && tsx --tsconfig ./tsconfig.server.json ./server.ts"
+    "start": "vite build && tsx --tsconfig ./tsconfig.server.json ./server.ts",
+    "lint": "npm run lint:code && npm run lint:styles && npm run ts:check",
+    "lint:code": "npx eslint ./src/**/*.{js,ts} --fix",
+    "lint:styles": "npx stylelint ./src/**/*.scss --fix",
+    "ts:check": "tsc --noEmit"
   }
 }
