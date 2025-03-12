@@ -1,8 +1,8 @@
-import type { Button } from '../../../../shared/components/Button';
-import type { Link } from '../../../../shared/components/Link';
-import type { FormField } from '../../../../shared/components/FormField';
+import type { Button } from '@components/Button';
+import type { Link } from '@components/Link';
+import type { FormFieldGeneric } from '@components/FormFieldGeneric';
 
-import type { TFormProps } from '../../../../shared/components/Form';
+import type { TFormProps } from '@components/Form';
 
 export type TFormLoginState = {
   login: string;
@@ -14,8 +14,8 @@ export type TFormLoginProps = TFormProps<TFormLoginState> & {
 };
 
 export type TFormLoginChildren = {
-  InputLogin: FormField;
-  InputPassword: FormField;
+  FieldLogin: FormFieldGeneric;
+  FieldPassword: FormFieldGeneric;
   ButtonAuth: Button;
   LinkRegister: Link;
 };

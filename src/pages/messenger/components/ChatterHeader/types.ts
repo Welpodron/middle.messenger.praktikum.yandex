@@ -1,6 +1,6 @@
-import type { TUser } from '../../../../shared/types/api';
+import type { TUser } from '@app/types/api';
 
-import type { Avatar } from '../../../../shared/components/Avatar';
+import type { Avatar } from '@components/Avatar';
 
 export type TChatterHeaderChildren = {
   AvatarUser: Avatar;

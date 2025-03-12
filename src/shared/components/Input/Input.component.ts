@@ -1,10 +1,14 @@
-import { Block } from '../Block';
+import type { TInputProps } from './types';
+
+import { Inputable } from '../Inputable';
 
 import template from './Input.hbs';
 
-import type { TInputProps } from './types';
-
-export class Input extends Block<TInputProps> {
+export class Input<TValue = string> extends Inputable<
+  TValue,
+  HTMLInputElement,
+  TInputProps
+> {
   constructor(props: TInputProps) {
     super({
       ...props,
@@ -17,7 +21,7 @@ export class Input extends Block<TInputProps> {
   }
 
   get value() {
-    return (this.getContent() as HTMLInputElement)?.value;
+    return this.getContent()?.value as TValue;
   }
 
   render() {

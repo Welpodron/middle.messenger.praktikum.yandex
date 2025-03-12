@@ -1,6 +1,6 @@
-import type { TChat, TUser } from '../../shared/types/api';
+import type { TChat, TUser } from '@app/types/api';
 
-import type { Dialog } from '../../shared/components/Dialog';
+import type { Dialog } from '@components/Dialog';
 import type { Chatter } from './components/Chatter';
 import type { Sidebar } from './components/Sidebar';
 

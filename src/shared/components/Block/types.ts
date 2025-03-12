@@ -1,9 +1,9 @@
 import type { Block } from './Block.component';
 import type { TDynamicObject, TEventHandler } from '../../types/utils';
 
-export type TBlockChildrenTypes =
-  | Block<TDynamicObject>
-  | Block<TDynamicObject>[]
+export type TBlockChildrenTypes<TElement extends Element = Element> =
+  | Block<TElement, TDynamicObject>
+  | Block<TElement, TDynamicObject>[]
   | string;
 
 export type TBlockProps = {

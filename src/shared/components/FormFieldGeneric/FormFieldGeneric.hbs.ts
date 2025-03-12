@@ -1,4 +1,4 @@
-import classNames from './FormField.module.scss';
+import classNames from './FormFieldGeneric.module.scss';
 
 export default `
 <label class="${classNames.field} {{className}}">

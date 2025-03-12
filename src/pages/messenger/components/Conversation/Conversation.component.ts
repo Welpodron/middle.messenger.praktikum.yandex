@@ -1,11 +1,11 @@
 import type { TConversationChildren, TConversationProps } from './types';
 
-import { Block } from '../../../../shared/components/Block';
+import { Block } from '@components/Block';
 import { Message } from '../Message';
 
 import template from './Conversation.hbs';
 
-export class Conversation extends Block<TConversationProps, TConversationChildren> {
+export class Conversation extends Block<HTMLUListElement, TConversationProps, TConversationChildren> {
   constructor(props: TConversationProps) {
     super({
       ...props,

@@ -1,8 +1,8 @@
-import type { TUser } from '../../../../shared/types/api';
+import type { TUser } from '@app/types/api';
 
-import type { TFormProps } from '../../../../shared/components/Form';
-import type { FormField } from '../../../../shared/components/FormField';
-import type { Button } from '../../../../shared/components/Button';
+import type { TFormProps } from '@components/Form';
+import type { FormFieldGeneric } from '@components/FormFieldGeneric';
+import type { Button } from '@components/Button';
 
 export type TFormInfoChangeState = {
   email: string;
@@ -21,12 +21,12 @@ export type TFormInfoChangeProps = TFormProps<TFormInfoChangeState> & {
 
 export type TFormInfoChangeChildren = {
   ButtonAvatar: Button;
-  InputEmail: FormField;
-  InputLogin: FormField;
-  InputFirstName: FormField;
-  InputSecondName: FormField;
-  InputDisplayName: FormField;
-  InputPhone: FormField;
+  FieldEmail: FormFieldGeneric;
+  FieldLogin: FormFieldGeneric;
+  FieldFirstName: FormFieldGeneric;
+  FieldSecondName: FormFieldGeneric;
+  FieldDisplayName: FormFieldGeneric;
+  FieldPhone: FormFieldGeneric;
   ButtonChangeData: Button;
   ButtonChangePassword: Button;
   ButtonLogout: Button;

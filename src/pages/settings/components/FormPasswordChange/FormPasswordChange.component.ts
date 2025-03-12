@@ -4,11 +4,11 @@ import type {
   TFormPasswordChangeProps,
 } from './types';
 
-import { COMMON_VALIDATIONS } from '../../../../shared/constants/validation';
+import { COMMON_VALIDATIONS } from '@constants/validation';
 
-import { Form } from '../../../../shared/components/Form';
-import { FormField } from '../../../../shared/components/FormField';
-import { Button } from '../../../../shared/components/Button';
+import { Form } from '@components/Form';
+import { FormFieldGeneric } from '@components/FormFieldGeneric';
+import { Button } from '@components/Button';
 
 import template from './FormPasswordChange.hbs';
 
@@ -20,66 +20,39 @@ export class FormPasswordChange extends Form<
   constructor(props: TFormPasswordChangeProps) {
     super({
       ...props,
-      InputPassword: new FormField({
+      FieldPassword: new FormFieldGeneric({
         label: 'Текущий пароль',
         type: 'password',
         name: 'password',
         placeholder: '**********',
         autocomplete: 'current-password',
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            password: value,
-          });
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'password');
         },
-        // ! Валидация на текущий пароль отсутствует из соображений возможности смены политики валидации для текущих пользователей или по какой-то причине пароль изменен на бэке
+        validation: COMMON_VALIDATIONS.NOT_EMPTY,
       }),
-      InputNewPassword: new FormField({
+      FieldNewPassword: new FormFieldGeneric({
         label: 'Новый пароль',
         type: 'password',
         name: 'new_password',
         placeholder: '**********',
         autocomplete: 'new-password',
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            new_password: value,
-          });
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'new_password');
         },
         validation: COMMON_VALIDATIONS.NOT_EMPTY,
       }),
-      InputNewPasswordRepeated: new FormField({
+      FieldNewPasswordRepeated: new FormFieldGeneric({
         label: 'Повторите новый пароль',
         type: 'password',
         name: 'new_password_repeated',
         placeholder: '**********',
         autocomplete: 'new-password',
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            new_password_repeated: value,
-          });
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'new_password_repeated');
         },
         validation: {
-          test: (value: string) => value === this.state.new_password,
+          test: value => value === this.state.new_password,
           message: 'Пароли не совпадают',
         },
       }),

@@ -4,12 +4,12 @@ import type {
   TFormLoginState,
 } from './types';
 
-import { COMMON_VALIDATIONS } from '../../../../shared/constants/validation';
+import { COMMON_VALIDATIONS } from '@constants/validation';
 
-import { Form } from '../../../../shared/components/Form';
-import { Button } from '../../../../shared/components/Button';
-import { Link } from '../../../../shared/components/Link';
-import { FormField } from '../../../../shared/components/FormField';
+import { Form } from '@components/Form';
+import { Button } from '@components/Button';
+import { Link } from '@components/Link';
+import { FormFieldGeneric } from '@components/FormFieldGeneric';
 
 import template from './FormLogin.hbs';
 
@@ -21,44 +21,25 @@ export class FormLogin extends Form<
   constructor(props: TFormLoginProps) {
     super({
       ...props,
-      InputLogin: new FormField({
+      FieldLogin: new FormFieldGeneric({
         label: 'Логин',
         name: 'login',
         type: 'text',
         placeholder: 'ivanivanov',
         autocomplete: 'username',
-        // TODO: По факту одно и тоже что и поля ниже - вынести в отдельный метод
         onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            login: value,
-          });
+          this.updateStateFromEvent(event, 'login');
         },
         validation: COMMON_VALIDATIONS.login,
       }),
-      InputPassword: new FormField({
+      FieldPassword: new FormFieldGeneric({
         label: 'Пароль',
         type: 'password',
         name: 'password',
         placeholder: '**********',
         autocomplete: 'current-password',
         onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            password: value,
-          });
+          this.updateStateFromEvent(event, 'password');
         },
         validation: COMMON_VALIDATIONS.password,
       }),

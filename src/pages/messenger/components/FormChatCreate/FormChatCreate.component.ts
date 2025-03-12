@@ -4,11 +4,11 @@ import type {
   TFormChatCreateState,
 } from './types';
 
-import { COMMON_VALIDATIONS } from '../../../../shared/constants/validation';
+import { COMMON_VALIDATIONS } from '@constants/validation';
 
-import { Form } from '../../../../shared/components/Form';
-import { Button } from '../../../../shared/components/Button';
-import { FormField } from '../../../../shared/components/FormField';
+import { Form } from '@components/Form';
+import { Button } from '@components/Button';
+import { FormFieldGeneric } from '@components/FormFieldGeneric';
 
 import classNames from './FormChatCreate.module.scss';
 
@@ -22,24 +22,15 @@ export class FormChatCreate extends Form<
   constructor(props: TFormChatCreateProps) {
     super({
       ...props,
-      InputLogin: new FormField({
+      FieldLogin: new FormFieldGeneric({
         labelClassName: 'sr-only',
         label: 'Логин',
         name: 'login',
         type: 'text',
         placeholder: 'Логин',
         autocomplete: 'off',
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            login: value,
-          });
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'login');
         },
         validation: COMMON_VALIDATIONS.login,
       }),

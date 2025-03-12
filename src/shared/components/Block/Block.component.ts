@@ -3,7 +3,7 @@ import Handlebars from 'handlebars';
 import type { TDynamicObject } from '../../types/utils';
 import type { TBlockChildren, TBlockProps } from './types';
 
-import { uuid } from '../../utils/uuid';
+import { uuid } from '@utils/uuid';
 
 import { EventBus } from '../../modules/EventBus';
 import { replaceStubWithComponentInstance } from './utils/replaceStubWithComponentInstance';
@@ -13,10 +13,10 @@ import { replaceStubWithComponentInstance } from './utils/replaceStubWithCompone
   TChildren - те самые children компоненты которые перечислены в hbs
 */
 export abstract class Block<
+  TRootElement extends Element = Element,
   TProps extends TDynamicObject = TDynamicObject,
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   TChildren extends TBlockChildren = {},
-  TRootElement extends Element = Element,
 > {
   static EVENTS = {
     INIT: 'init',

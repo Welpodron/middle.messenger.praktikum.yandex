@@ -1,4 +1,5 @@
-import type { TChat, TUser } from '../../../../shared/types/api';
+import type { TChat, TUser } from '@app/types/api';
+import type { TAwaitable } from '@app/types/utils';
 
 import type { ChatterHeader } from '../ChatterHeader';
 import type { Conversation } from '../Conversation';
@@ -11,6 +12,7 @@ export type TChatterBoxChildren = {
 };
 
 export type TChatterBoxProps = {
+  onSendMessage: (message: string) => TAwaitable<void>;
   currentUser: TUser;
   chat: TChat;
 };

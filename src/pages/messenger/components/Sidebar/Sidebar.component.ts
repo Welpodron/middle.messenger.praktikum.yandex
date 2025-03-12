@@ -1,19 +1,19 @@
 import type { TSidebarChildren, TSidebarProps } from './types';
 
-import { Block } from '../../../../shared/components/Block';
-import { Link } from '../../../../shared/components/Link';
-import { Avatar } from '../../../../shared/components/Avatar';
-import { Button } from '../../../../shared/components/Button';
+import { Block } from '@components/Block';
+import { Link } from '@components/Link';
+import { Avatar } from '@components/Avatar';
+import { Button } from '@components/Button';
 import { ChatsList } from '../ChatsList';
 import { FormChatSearch } from '../FormChatSearch';
 
-import iconPlus from '../../../../shared/icons/plus.svg?raw';
+import iconPlus from '@icons/plus.svg?raw';
 
 import classNames from './Sidebar.module.scss';
 
 import template from './Sidebar.hbs';
 
-export class Sidebar extends Block<TSidebarProps, TSidebarChildren> {
+export class Sidebar extends Block<HTMLElement, TSidebarProps, TSidebarChildren> {
   // TODO: В целом в проекте у большинства компонентов в прокси залетают лишние пропсы, которые по факту принадлежат children, а не самому компоненту, нужно в целом пофиксить эту историю
   constructor(props: TSidebarProps) {
     super({
@@ -29,9 +29,6 @@ export class Sidebar extends Block<TSidebarProps, TSidebarChildren> {
         onChatClick: props.onChatClick,
       }),
       FormChatSearch: new FormChatSearch({
-        initialState: {
-          search: '',
-        },
         onSubmit: props.onSearch,
       }),
       ButtonCreateChat: new Button({

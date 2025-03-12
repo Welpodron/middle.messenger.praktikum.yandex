@@ -1,22 +1,22 @@
 import type { TSettingsProps, TSettingsChildren } from './types';
 
-import { Block } from '../../shared/components/Block';
-import { Link } from '../../shared/components/Link';
+import { Block } from '@components/Block';
+import { Link } from '@components/Link';
 import { FormInfoChange } from './components/FormInfoChange';
 
-import { Dialog } from '../../shared/components/Dialog';
+import { Dialog } from '@components/Dialog';
 import { FormPasswordChange } from './components/FormPasswordChange';
 import { FormAvatarChange } from './components/FormAvatarChange';
 
 import classNames from './Settings.module.scss';
 
-import chevronLeftIcon from '../../shared/icons/chevron-left.svg?raw';
+import chevronLeftIcon from '@icons/chevron-left.svg?raw';
 
 import { PAGE_TITLE } from './constants';
 
 import template from './Settings.hbs';
 
-export class Settings extends Block<TSettingsProps, TSettingsChildren> {
+export class Settings extends Block<HTMLElement, TSettingsProps, TSettingsChildren> {
   constructor(props: Omit<TSettingsProps, 'title'>) {
     super({
       ...props,
@@ -49,9 +49,6 @@ export class Settings extends Block<TSettingsProps, TSettingsChildren> {
       DialogAvatarChange: new Dialog({
         title: 'Изменение аватара',
         Children: new FormAvatarChange({
-          initialState: {
-            avatar: null,
-          },
           onSubmit: async (state) => {
             console.log(state);
           },
@@ -60,11 +57,6 @@ export class Settings extends Block<TSettingsProps, TSettingsChildren> {
       DialogPasswordChange: new Dialog({
         title: 'Изменение пароля',
         Children: new FormPasswordChange({
-          initialState: {
-            password: '',
-            new_password: '',
-            new_password_repeated: '',
-          },
           onSubmit: async (state) => {
             console.log(state);
           },

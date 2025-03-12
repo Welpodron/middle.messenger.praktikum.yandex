@@ -1,15 +1,15 @@
-import type { TDynamicObject } from '../../shared/types/utils';
+import type { TDynamicObject } from '@app/types/utils';
 
 import type { TSomethingWrongChildren } from './types';
 
-import { Block } from '../../shared/components/Block';
-import { ErrorSplash } from '../../shared/components/ErrorSplash';
+import { Block } from '@components/Block';
+import { ErrorSplash } from '@components/ErrorSplash';
 
 import { PAGE_TITLE, PAGE_DESCRIPTION } from './constants';
 
 import template from './SomethingWrong.hbs';
 
-export class SomethingWrong extends Block<TDynamicObject, TSomethingWrongChildren> {
+export class SomethingWrong extends Block<HTMLElement, TDynamicObject, TSomethingWrongChildren> {
   constructor() {
     super({
       ErrorSplash: new ErrorSplash({

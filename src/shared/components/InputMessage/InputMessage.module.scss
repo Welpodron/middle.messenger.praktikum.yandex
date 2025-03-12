@@ -1,0 +1,22 @@
+.root {
+  display: block;
+  max-width: 100%;
+  overflow: auto;
+  cursor: text;
+  white-space: break-spaces;
+  min-height: 24px;
+  max-height: calc(6 * 24px);
+  background: var(--colorGreySecondary);
+  padding: var(--spacing4x) var(--spacing6x);
+  border-radius: var(--borderRadiusXs);
+
+  &::-webkit-scrollbar {
+    background: transparent;
+    width: var(--spacing4x);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--colorGreyPrimary);
+    border-radius: var(--borderRadiusXs);
+  }
+}

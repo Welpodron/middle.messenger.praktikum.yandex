@@ -1,7 +1,7 @@
-import type { TUser } from '../../shared/types/api';
+import type { TUser } from '@app/types/api';
 
-import type { Link } from '../../shared/components/Link';
-import type { Dialog } from '../../shared/components/Dialog';
+import type { Link } from '@components/Link';
+import type { Dialog } from '@components/Dialog';
 
 import type { FormInfoChange } from './components/FormInfoChange';
 

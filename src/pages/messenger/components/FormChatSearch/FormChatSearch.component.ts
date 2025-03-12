@@ -4,8 +4,8 @@ import type {
   TFormChatSearchState,
 } from './types';
 
-import { Form } from '../../../../shared/components/Form';
-import { InputSearch } from '../../../../shared/components/InputSearch';
+import { Form } from '@components/Form';
+import { InputSearch } from '@components/InputSearch';
 
 import classNames from './FormChatSearch.module.scss';
 
@@ -24,12 +24,7 @@ export class FormChatSearch extends Form<
         placeholder: 'Поиск',
         label: 'Поиск чата',
         onInput: async (event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.setState({
-            ...this.state,
-            search: value,
-          });
+          this.updateStateFromEvent(event, 'search');
 
           await this.props.onSubmit(this.state);
         },

@@ -4,11 +4,11 @@ import type {
   TFormAvatarChangeProps,
 } from './types';
 
-import { COMMON_VALIDATIONS } from '../../../../shared/constants/validation';
+import { COMMON_VALIDATIONS } from '@constants/validation';
 
-import { Form } from '../../../../shared/components/Form';
-import { FormField } from '../../../../shared/components/FormField';
-import { Button } from '../../../../shared/components/Button';
+import { Form } from '@components/Form';
+import { FormFieldGeneric } from '@components/FormFieldGeneric';
+import { Button } from '@components/Button';
 
 import template from './FormAvatarChange.hbs';
 
@@ -20,7 +20,7 @@ export class FormAvatarChange extends Form<
   constructor(props: TFormAvatarChangeProps) {
     super({
       ...props,
-      InputAvatar: new FormField({
+      InputAvatar: new FormFieldGeneric({
         label: 'Аватар',
         name: 'avatar',
         type: 'file',

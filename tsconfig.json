@@ -18,6 +18,14 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@utils/*": ["shared/utils/*"],
+      "@icons/*": ["shared/icons/*"],
+      "@components/*": ["shared/components/*"],
+      "@constants/*": ["shared/constants/*"],
+      "@app/types/*": ["shared/types/*"],
+    },
     "types": ["vite/client"]
   },
   "include": ["src"]

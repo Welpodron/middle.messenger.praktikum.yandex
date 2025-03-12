@@ -1,6 +1,6 @@
 import type { TChatterBoxChildren, TChatterBoxProps } from './types';
 
-import { Block } from '../../../../shared/components/Block';
+import { Block } from '@components/Block';
 
 import { ChatterHeader } from '../ChatterHeader';
 import { Conversation } from '../Conversation';
@@ -9,7 +9,7 @@ import { FormMessage } from '../FormMessage';
 import template from './ChatterBox.hbs';
 
 // TODO: После того как покажут контракты с бэка можно добавить форму загрузки атачментов
-export class ChatterBox extends Block<TChatterBoxProps, TChatterBoxChildren> {
+export class ChatterBox extends Block<HTMLDivElement, TChatterBoxProps, TChatterBoxChildren> {
   constructor(props: TChatterBoxProps) {
     super({
       ...props,
@@ -21,11 +21,8 @@ export class ChatterBox extends Block<TChatterBoxProps, TChatterBoxChildren> {
         messages: props.chat.messages,
       }),
       FormMessage: new FormMessage({
-        initialState: {
-          message: '',
-        },
         onSubmit: async (state) => {
-          console.log(state);
+          await this.props.onSendMessage(state.message);
         },
       }),
     });

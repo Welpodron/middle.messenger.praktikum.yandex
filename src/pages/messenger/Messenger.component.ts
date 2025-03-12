@@ -1,12 +1,12 @@
-import type { TChat } from '../../shared/types/api';
+import type { TChat } from '@app/types/api';
 import type { TFormChatSearchState } from './components/FormChatSearch';
 import type { TMessengerChildren, TMessengerProps } from './types';
 
-import { debounce } from '../../shared/utils/debounce';
-import { deepCompare } from '../../shared/utils/deepCompare';
+import { debounce } from '@utils/debounce';
+import { deepCompare } from '@utils/deepCompare';
 
-import { Block } from '../../shared/components/Block';
-import { Dialog } from '../../shared/components/Dialog';
+import { Block } from '@components/Block';
+import { Dialog } from '@components/Dialog';
 import { Sidebar } from './components/Sidebar';
 import { Chatter } from './components/Chatter';
 import { ChatterBox } from './components/ChatterBox';
@@ -18,7 +18,7 @@ import { PAGE_TITLE } from './constants';
 import template from './Messenger.hbs';
 
 // TODO: Нужно в целом сделать ренейминг внутренних компонентов и прийти к какой-то общей конвенции по неймингу остальных компонентов в проекте
-export class Messenger extends Block<TMessengerProps, TMessengerChildren> {
+export class Messenger extends Block<HTMLDivElement, TMessengerProps, TMessengerChildren> {
   // Ref аналог полей, которое стабильно при ререндере
   activeChat?: TChat;
   search = '';
@@ -81,9 +81,6 @@ export class Messenger extends Block<TMessengerProps, TMessengerChildren> {
       DialogCreateChat: new Dialog({
         title: 'Создать чат',
         Children: new FormChatCreate({
-          initialState: {
-            login: '',
-          },
           onSubmit: (state) => {
             console.log(state);
           },
@@ -100,9 +97,7 @@ export class Messenger extends Block<TMessengerProps, TMessengerChildren> {
     }
 
     this.children.Sidebar.children.ChatsList.children.Chats.forEach((chat) => {
-      chat.children.ChatBackground.setProps({
-        isActive: chat.props.id === chatId,
-      });
+      chat.toggle(chat.props.id === chatId);
     });
 
     const chat = this.props.chats.find(chat => chat.id === chatId);
@@ -112,6 +107,9 @@ export class Messenger extends Block<TMessengerProps, TMessengerChildren> {
         ChatterBox: new ChatterBox({
           currentUser: this.props.currentUser,
           chat,
+          onSendMessage: async (message) => {
+            console.log(message);
+          },
         }),
       });
     }

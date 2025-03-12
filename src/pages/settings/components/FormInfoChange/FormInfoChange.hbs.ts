@@ -10,12 +10,12 @@ export default `
             {{currentUser.login}}
         {{/if}}
     </h2>
-    {{{InputEmail}}}
-    {{{InputLogin}}}
-    {{{InputFirstName}}}
-    {{{InputSecondName}}}
-    {{{InputDisplayName}}}
-    {{{InputPhone}}}
+    {{{FieldEmail}}}
+    {{{FieldLogin}}}
+    {{{FieldFirstName}}}
+    {{{FieldSecondName}}}
+    {{{FieldDisplayName}}}
+    {{{FieldPhone}}}
     <div class="${classNames.actions}">
         {{{ErrorText}}}
         {{{ButtonChangeData}}}

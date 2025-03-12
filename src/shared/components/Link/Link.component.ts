@@ -4,7 +4,7 @@ import type { TLinkChildren, TLinkProps } from './types';
 
 import template from './Link.hbs';
 
-export class Link extends Block<TLinkProps, TLinkChildren> {
+export class Link extends Block<HTMLAnchorElement, TLinkProps, TLinkChildren> {
   constructor(props: TLinkProps & TLinkChildren) {
     super(props);
   }

@@ -1,6 +1,8 @@
 .form {
   padding: var(--spacing6x) var(--spacing0x);
   border-top: var(--spacing1px) solid var(--colorGreySecondary);
+  width: 100%;
+  max-width: 100%;
 }
 
 .field {
@@ -15,8 +17,9 @@
 }
 
 .container {
-  display: flex;
+  display: grid;
   align-items: start;
+  grid-template-columns: 1fr auto;
   gap: var(--spacing4x);
 }
 

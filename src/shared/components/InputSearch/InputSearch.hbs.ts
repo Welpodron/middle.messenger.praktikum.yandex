@@ -1,4 +1,4 @@
-import searchIcon from '../../../shared/icons/search.svg?raw';
+import searchIcon from '@icons/search.svg?raw';
 
 import classNames from './InputSearch.module.scss';
 

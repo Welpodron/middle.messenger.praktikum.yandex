@@ -1,6 +1,6 @@
 export const COMMON_VALIDATIONS = {
   NOT_EMPTY: {
-    test: (value: string) => /^.+$/.test(value),
+    test: (value: string) => /^.+$/m.test(value),
     message: 'Поле не может быть пустым',
   },
   login: {

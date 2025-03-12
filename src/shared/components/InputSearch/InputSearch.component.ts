@@ -7,7 +7,7 @@ import classNames from './InputSearch.module.scss';
 
 import type { TInputSearchProps, TInputSearchChildren } from './types';
 
-export class InputSearch extends Block<TInputSearchProps, TInputSearchChildren> {
+export class InputSearch extends Block<HTMLLabelElement, TInputSearchProps, TInputSearchChildren> {
   constructor(props: TInputSearchProps) {
     super({
       ...props,

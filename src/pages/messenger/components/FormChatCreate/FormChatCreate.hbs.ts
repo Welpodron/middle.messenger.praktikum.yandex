@@ -1,6 +1,6 @@
 export default `
 <form>
-    {{{InputLogin}}}
+    {{{FieldLogin}}}
     {{{ButtonCreate}}}
     {{{ErrorText}}}
 </form>`;

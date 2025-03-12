@@ -1,6 +1,7 @@
-import type { TAwaitable } from '../../types/utils';
+import type { TEventHandler } from '../../types/utils';
 
 export type TInputProps = {
+  className?: string;
   type:
     | 'email'
     | 'hidden'
@@ -19,8 +20,7 @@ export type TInputProps = {
   isRequired?: boolean;
   isDisabled?: boolean;
   isReadonly?: boolean;
-  onBlur?: (event: Event) => TAwaitable<void>;
-  onChange?: (event: Event) => TAwaitable<void>;
-  onInput?: (event: Event) => TAwaitable<void>;
-  className?: string;
+  onBlur?: TEventHandler<FocusEvent>;
+  onInput?: TEventHandler<InputEvent>;
+  onChange?: TEventHandler<Event>;
 };

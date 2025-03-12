@@ -3,13 +3,13 @@ import type { TDialogChildren, TDialogProps } from './types';
 import { Block } from '../Block';
 import { Button } from '../Button';
 
-import iconX from '../../icons/x.svg?raw';
+import iconX from '@icons/x.svg?raw';
 
 import classNames from './Dialog.module.scss';
 
 import template from './Dialog.hbs';
 
-export class Dialog extends Block<TDialogProps, TDialogChildren, HTMLDialogElement> {
+export class Dialog extends Block<HTMLDialogElement, TDialogProps, TDialogChildren> {
   isDisabled = false;
 
   constructor(props: TDialogProps & Pick<TDialogChildren, 'Children'>) {
