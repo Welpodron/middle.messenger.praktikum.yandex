@@ -1,11 +1,9 @@
-import type { TChat } from '../../../../shared/types/api';
+import type { TChat } from '@app/types/api';
 
-import type { Avatar } from '../../../../shared/components/Avatar';
-import type { ChatBackground } from '../ChatBackground';
+import type { Avatar } from '@components/Avatar';
 
 export type TChatChildren = {
   Avatar: Avatar;
-  ChatBackground: ChatBackground;
 };
 
 export type TChatProps = TChat & {

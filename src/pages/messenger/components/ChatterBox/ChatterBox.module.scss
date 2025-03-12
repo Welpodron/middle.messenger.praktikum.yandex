@@ -2,7 +2,8 @@
   display: grid;
   max-height: 100vh;
   height: 100vh;
-  grid-template-rows: max-content 1fr max-content;
+  grid-template-rows: max-content minmax(0, 1fr) max-content;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .header {
@@ -11,6 +12,17 @@
 
 .conversation {
   padding: var(--spacing6x) var(--spacing10x);
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    background: transparent;
+    width: var(--spacing4x);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--colorGreySecondary);
+    border-radius: var(--borderRadiusXs);
+  }
 }
 
 .footer {

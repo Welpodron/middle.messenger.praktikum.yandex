@@ -1,12 +1,11 @@
 import type { TChatChildren, TChatProps } from './types';
 
-import { Block } from '../../../../shared/components/Block';
-import { Avatar } from '../../../../shared/components/Avatar';
-import { ChatBackground } from '../ChatBackground';
+import { Block } from '@components/Block';
+import { Avatar } from '@components/Avatar';
 
 import template from './Chat.hbs';
 
-export class Chat extends Block<TChatProps, TChatChildren> {
+export class Chat extends Block<HTMLButtonElement, TChatProps, TChatChildren> {
   constructor(props: TChatProps) {
     super({
       ...props,
@@ -19,10 +18,17 @@ export class Chat extends Block<TChatProps, TChatChildren> {
       Avatar: new Avatar({
         picture: props.picture,
       }),
-      ChatBackground: new ChatBackground({
-        isActive: props.isActive,
-      }),
     });
+  }
+
+  // Не апдейтим пропсы, а делаем toggle атрибута, чтобы избежать ререндера всего компонента
+  toggle(isActive: boolean) {
+    if (isActive) {
+      this.getContent()?.setAttribute('data-active', '');
+    }
+    else {
+      this.getContent()?.removeAttribute('data-active');
+    }
   }
 
   render() {

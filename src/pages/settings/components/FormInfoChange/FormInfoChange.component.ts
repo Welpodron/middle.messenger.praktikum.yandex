@@ -4,12 +4,12 @@ import type {
   TFormInfoChangeProps,
 } from './types';
 
-import { COMMON_VALIDATIONS } from '../../../../shared/constants/validation';
+import { COMMON_VALIDATIONS } from '@constants/validation';
 
-import { Form } from '../../../../shared/components/Form';
-import { FormField } from '../../../../shared/components/FormField';
-import { Button } from '../../../../shared/components/Button';
-import { Avatar } from '../../../../shared/components/Avatar';
+import { Form } from '@components/Form';
+import { FormFieldGeneric } from '@components/FormFieldGeneric';
+import { Button } from '@components/Button';
+import { Avatar } from '@components/Avatar';
 
 import classNames from './FormInfoChange.module.scss';
 
@@ -33,128 +33,74 @@ export class FormInfoChange extends Form<
           picture: props.currentUser.picture,
         }),
       }),
-      InputEmail: new FormField({
+      FieldEmail: new FormFieldGeneric({
         label: 'Почта',
         name: 'email',
         type: 'email',
         placeholder: 'pochta@yandex.ru',
         autocomplete: 'email',
-        value: props.initialState.email,
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            email: value,
-          });
+        value: props.initialState?.email,
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'email');
         },
         validation: COMMON_VALIDATIONS.email,
       }),
-      InputLogin: new FormField({
+      FieldLogin: new FormFieldGeneric({
         label: 'Логин',
         name: 'login',
         type: 'text',
         placeholder: 'ivanivanov',
         autocomplete: 'username',
-        value: props.initialState.login,
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            login: value,
-          });
+        value: props.initialState?.login,
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'login');
         },
         validation: COMMON_VALIDATIONS.login,
       }),
-      InputFirstName: new FormField({
+      FieldFirstName: new FormFieldGeneric({
         label: 'Имя',
         name: 'first_name',
         type: 'text',
         placeholder: 'Иван',
         autocomplete: 'given-name',
-        value: props.initialState.first_name,
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            first_name: value,
-          });
+        value: props.initialState?.first_name,
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'first_name');
         },
         validation: COMMON_VALIDATIONS.names,
       }),
-      InputSecondName: new FormField({
+      FieldSecondName: new FormFieldGeneric({
         label: 'Фамилия',
         name: 'second_name',
         type: 'text',
         placeholder: 'Иванов',
         autocomplete: 'family-name',
-        value: props.initialState.second_name,
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            second_name: value,
-          });
+        value: props.initialState?.second_name,
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'second_name');
         },
         validation: COMMON_VALIDATIONS.names,
       }),
-      InputDisplayName: new FormField({
+      FieldDisplayName: new FormFieldGeneric({
         label: 'Имя в чате',
         name: 'display_name',
         type: 'text',
         placeholder: 'Иван',
         autocomplete: 'username',
-        value: props.initialState.display_name,
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            display_name: value,
-          });
+        value: props.initialState?.display_name,
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'display_name');
         },
       }),
-      InputPhone: new FormField({
+      FieldPhone: new FormFieldGeneric({
         label: 'Телефон',
         name: 'phone',
         type: 'text',
         placeholder: '+7 (909) 967 30 30',
         autocomplete: 'tel',
-        value: props.initialState.phone,
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            phone: value,
-          });
+        value: props.initialState?.phone,
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'phone');
         },
         validation: COMMON_VALIDATIONS.phone,
       }),

@@ -1,6 +1,6 @@
 import type { TNavLink } from '../../types';
 
-import type { Link } from '../../../../shared/components/Link';
+import type { Link } from '@components/Link';
 
 export type TNavChildren = {
   Links: Link[];

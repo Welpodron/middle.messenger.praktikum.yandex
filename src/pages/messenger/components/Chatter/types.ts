@@ -1,4 +1,4 @@
-import type { TChat } from '../../../../shared/types/api';
+import type { TChat } from '@app/types/api';
 import type { ChatterBox } from '../ChatterBox';
 
 export type TChatterChildren = {

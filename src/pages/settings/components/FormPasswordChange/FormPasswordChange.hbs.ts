@@ -2,9 +2,9 @@ import classNames from './FormPasswordChange.module.scss';
 
 export default `
 <form>
-    {{{InputPassword}}}
-    {{{InputNewPassword}}}
-    {{{InputNewPasswordRepeated}}}
+    {{{FieldPassword}}}
+    {{{FieldNewPassword}}}
+    {{{FieldNewPasswordRepeated}}}
     <div class="${classNames.actions}">
         {{{ErrorText}}}
         {{{ButtonChangePassword}}}

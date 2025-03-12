@@ -1,8 +1,7 @@
 import classNames from './Chat.module.scss';
 
 export default `
-<button type="button" class="${classNames.root}">
-    {{{ChatBackground}}}
+<button type="button" class="${classNames.root}" {{#if isActive}}data-active{{/if}}>
     <span class="${classNames.content}">
         {{{Avatar}}}
         <span class="${classNames.info}"> 

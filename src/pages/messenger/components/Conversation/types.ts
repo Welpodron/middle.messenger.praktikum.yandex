@@ -1,4 +1,4 @@
-import type { TMessage, TUser } from '../../../../shared/types/api';
+import type { TMessage, TUser } from '@app/types/api';
 
 import type { Message } from '../Message';
 

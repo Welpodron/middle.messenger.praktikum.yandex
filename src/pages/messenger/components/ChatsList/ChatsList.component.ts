@@ -1,11 +1,11 @@
 import type { TChatsListChildren, TChatsListProps } from './types';
 
-import { Block } from '../../../../shared/components/Block';
+import { Block } from '@components/Block';
 import { Chat } from '../Chat';
 
 import template from './ChatsList.hbs';
 
-export class ChatsList extends Block<TChatsListProps, TChatsListChildren> {
+export class ChatsList extends Block<HTMLDivElement, TChatsListProps, TChatsListChildren> {
   constructor(props: TChatsListProps) {
     super({
       ...props,

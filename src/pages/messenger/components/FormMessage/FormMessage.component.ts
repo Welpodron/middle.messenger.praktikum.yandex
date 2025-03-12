@@ -4,18 +4,17 @@ import type {
   TFormMessageState,
 } from './types';
 
-import { COMMON_VALIDATIONS } from '../../../../shared/constants/validation';
+import { COMMON_VALIDATIONS } from '@constants/validation';
 
-import { Form } from '../../../../shared/components/Form';
-import { Button } from '../../../../shared/components/Button';
-import { FormField } from '../../../../shared/components/FormField';
+import { Form } from '@components/Form';
+import { Button } from '@components/Button';
+import { FormFieldMessage } from '@components/FormFieldMessage';
 
-import sendIcon from '../../../../shared/icons/send.svg?raw';
+import sendIcon from '@icons/send.svg?raw';
 
 import classNames from './FormMessage.module.scss';
 
 import template from './FormMessage.hbs';
-;
 
 export class FormMessage extends Form<
   TFormMessageState,
@@ -25,26 +24,15 @@ export class FormMessage extends Form<
   constructor(props: TFormMessageProps) {
     super({
       ...props,
-      InputMessage: new FormField({
-        labelClassName: 'sr-only',
-        className: classNames.field,
-        inputClassName: classNames.input,
-        label: 'Сообщение',
-        name: 'message',
-        type: 'text',
-        placeholder: 'Сообщение',
-        autocomplete: 'off',
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
+      InputMessage: new FormFieldMessage({
+        placeholder: 'Сообщение...',
+        onInput: (event) => {
+          const target = event.target as HTMLSpanElement;
 
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            message: value,
-          });
+          this.updateState(target.textContent ?? '', 'message');
+        },
+        onEnter: async () => {
+          this.getContent()?.dispatchEvent(new Event('submit'));
         },
         validation: COMMON_VALIDATIONS.NOT_EMPTY,
       }),

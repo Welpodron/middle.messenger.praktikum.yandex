@@ -1,10 +1,10 @@
 import type { TChatterProps, TChatterChildren } from './types';
 
-import { Block } from '../../../../shared/components/Block';
+import { Block } from '@components/Block';
 
 import template from './Chatter.hbs';
 
-export class Chatter extends Block<TChatterProps, TChatterChildren> {
+export class Chatter extends Block<HTMLElement, TChatterProps, TChatterChildren> {
   constructor() {
     super();
   }

@@ -1,7 +1,7 @@
-import type { TUser } from '../../../../shared/types/api';
+import type { TUser } from '@app/types/api';
 
-import type { Link } from '../../../../shared/components/Link';
-import type { Button } from '../../../../shared/components/Button';
+import type { Link } from '@components/Link';
+import type { Button } from '@components/Button';
 
 import type { ChatsList, TChatsListProps } from '../ChatsList';
 import type { FormChatSearch } from '../FormChatSearch';

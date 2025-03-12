@@ -1,5 +1,5 @@
-import type { TFormProps } from '../../../../shared/components/Form';
-import type { InputSearch } from '../../../../shared/components/InputSearch';
+import type { TFormProps } from '@components/Form';
+import type { InputSearch } from '@components/InputSearch';
 
 export type TFormChatSearchState = {
   search: string;

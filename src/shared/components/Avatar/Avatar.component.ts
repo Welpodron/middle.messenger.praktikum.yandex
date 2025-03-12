@@ -4,7 +4,7 @@ import { Block } from '../Block';
 
 import template from './Avatar.hbs';
 
-export class Avatar extends Block<TAvatarProps> {
+export class Avatar extends Block<HTMLSpanElement, TAvatarProps> {
   constructor(props: TAvatarProps) {
     super(props);
   }

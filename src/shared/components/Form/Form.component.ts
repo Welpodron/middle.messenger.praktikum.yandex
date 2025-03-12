@@ -1,14 +1,16 @@
+import type { TDynamicObject } from '@app/types/utils';
+
 import { Block } from '../Block';
 import { ErrorText } from '../ErrorText';
-import { FormField } from '../FormField';
+import { Validatable } from '../Validatable';
 
-import type { TFormProps, TFromChildren } from './types';
+import type { TFormProps, TFormChildren } from './types';
 
 export abstract class Form<
-  TState,
+  TState extends TDynamicObject,
   TProps extends TFormProps<TState>,
   TChildren,
-> extends Block<TProps, TChildren & TFromChildren, HTMLFormElement> {
+> extends Block<HTMLFormElement, TProps, TChildren & TFormChildren> {
   // ref аналог
   isDisabled = false;
 
@@ -44,7 +46,21 @@ export abstract class Form<
       }),
     });
 
-    this.state = this.props.initialState;
+    this.state = this.props.initialState ?? ({} as TState);
+  }
+
+  updateState<TKey extends keyof TState>(value: TState[TKey], field: TKey) {
+    this.setState({
+      ...this.state,
+      [field]: value,
+    });
+  }
+
+  // Используется как default функция для апдейта state внутри onChange FormField, если нужен другой кейс, то переопределить в наследнике или же вообще не использовать
+  updateStateFromEvent<TKey extends keyof TState>(event: Event, field: TKey) {
+    const target = event.target as HTMLInputElement;
+
+    this.updateState(target.value as TState[TKey], field);
   }
 
   setState(newState: TState) {
@@ -53,7 +69,7 @@ export abstract class Form<
 
   validate() {
     return !Object.values(this.children).some(
-      child => child instanceof FormField && !child.validate(),
+      child => child instanceof Validatable && !child.validate(),
     );
   }
 

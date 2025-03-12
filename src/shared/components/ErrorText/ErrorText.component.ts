@@ -4,7 +4,7 @@ import template from './ErrorText.hbs';
 
 import type { TErrorTextProps } from './types';
 
-export class ErrorText extends Block<TErrorTextProps> {
+export class ErrorText extends Block<HTMLSpanElement, TErrorTextProps> {
   constructor(props: TErrorTextProps) {
     super(props);
   }

@@ -1,7 +1,7 @@
-import type { Button } from '../../../../shared/components/Button';
-import type { FormField } from '../../../../shared/components/FormField';
+import type { Button } from '@components/Button';
+import type { FormFieldGeneric } from '@components/FormFieldGeneric';
 
-import type { TFormProps } from '../../../../shared/components/Form';
+import type { TFormProps } from '@components/Form';
 
 export type TFormChatCreateState = {
   login: string;
@@ -10,6 +10,6 @@ export type TFormChatCreateState = {
 export type TFormChatCreateProps = TFormProps<TFormChatCreateState>;
 
 export type TFormChatCreateChildren = {
-  InputLogin: FormField;
+  FieldLogin: FormFieldGeneric;
   ButtonCreate: Button;
 };
