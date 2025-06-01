@@ -1,4 +1,3 @@
-// TODO: Добавить после того как станет известен Server url
 export const BASE_URL = 'https://ya-praktikum.tech/api/v2';
 
 export const enum HTTP_METHODS {

@@ -75,15 +75,13 @@ class _ChatsConnector extends Block<
   }
 }
 
-export const ChatsConnector = connect<
-  HTMLDivElement,
-  TChatsConnectorProps
-  // TChatsConnectorChildren
->(({ chats, chat }) => ({
-  state: {
-    chats,
-    chat,
-  },
-}))(_ChatsConnector);
+export const ChatsConnector = connect<HTMLDivElement, TChatsConnectorProps>(
+  ({ chats, chat }) => ({
+    state: {
+      chats,
+      chat,
+    },
+  }),
+)(_ChatsConnector);
 
 export type ChatsConnector = InstanceType<typeof ChatsConnector>;

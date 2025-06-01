@@ -126,19 +126,17 @@ class _ChatterConnector extends Block<
   }
 }
 
-export const ChatterConnector = connect<
-  HTMLDivElement,
-  TChatterConnectorProps
-  // TChatterConnectorChildren
->(({ chat, chatsMessages, user }) => {
-  return {
-    state: {
-      user,
-      chat,
-      chatMessages:
-        (chat?.id ? chatsMessages?.[chat.id] : new Map()) ?? new Map(),
-    },
-  };
-})(_ChatterConnector);
+export const ChatterConnector = connect<HTMLDivElement, TChatterConnectorProps>(
+  ({ chat, chatsMessages, user }) => {
+    return {
+      state: {
+        user,
+        chat,
+        chatMessages:
+          (chat?.id ? chatsMessages?.[chat.id] : new Map()) ?? new Map(),
+      },
+    };
+  },
+)(_ChatterConnector);
 
 export type ChatterConnector = InstanceType<typeof ChatterConnector>;

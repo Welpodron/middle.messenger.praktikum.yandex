@@ -57,13 +57,12 @@ class _AlertsConnector extends Block<
   }
 }
 
-export const AlertsConnector = connect<
-  HTMLDivElement,
-  TAlertsConnectorProps
->(({ alerts }) => ({
-  state: {
-    alerts,
-  },
-}))(_AlertsConnector);
+export const AlertsConnector = connect<HTMLDivElement, TAlertsConnectorProps>(
+  ({ alerts }) => ({
+    state: {
+      alerts,
+    },
+  }),
+)(_AlertsConnector);
 
 export type AlertsConnector = InstanceType<typeof AlertsConnector>;
