@@ -28,7 +28,7 @@
       "@controllers/*": ["shared/controllers/*"],
       "@components/*": ["shared/components/*"],
       "@constants/*": ["shared/constants/*"],
-      "@app/types/*": ["shared/types/*"],
+      "@app/types/*": ["shared/types/*"]
     },
     "types": ["vite/client"]
   },
