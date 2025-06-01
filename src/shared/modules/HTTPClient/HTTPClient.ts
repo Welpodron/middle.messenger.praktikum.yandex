@@ -1,49 +1,74 @@
 import type { TDynamicObject } from '../../types/utils';
-import type { TRequest, TRequestOptions } from './types';
+import type { TRequestOptions } from './types';
 
-import { dataToQueryString } from './utils/dataToQueryString';
+import { log } from '@utils/log';
 
 import { BASE_URL, HTTP_METHODS } from './constants';
+import { HTTPClientError } from './errors/HTTPClientError';
+import { dataToQueryString } from './utils/dataToQueryString';
 
 export class HTTPClient {
-  private _endpoint: string;
+  static BASE_URL = BASE_URL;
 
-  constructor(endpoint: string) {
-    this._endpoint = `${BASE_URL}${endpoint}`;
+  static get<TResponseData>(path: string, options: TRequestOptions = {}, signal?: AbortSignal) {
+    return HTTPClient.request<TResponseData>(
+      `${HTTPClient.BASE_URL}${path}${dataToQueryString(
+        options.data as TDynamicObject,
+      )}`,
+      {
+        method: HTTP_METHODS.GET,
+      },
+      signal,
+    );
   }
 
-  // TODO: В большинстве классов используются методы не в виде стрелочных функций, нужно привести к одному формату, пока что это копипаста из тренажера, отрефачить в некст спринтах
-  get: TRequest = (path, options = {}) =>
-    this.request(`${this._endpoint + path}${dataToQueryString(options.data as TDynamicObject)}`, {
-      method: HTTP_METHODS.GET,
-    });
+  static post<TResponseData>(path: string, options: TRequestOptions = {}, signal?: AbortSignal) {
+    return HTTPClient.request<TResponseData>(`${HTTPClient.BASE_URL}${path}`, {
+      ...options,
+      method: HTTP_METHODS.POST,
+    }, signal);
+  }
 
-  post: TRequest = (path, options = {}) =>
-    this.request(this._endpoint + path, { ...options, method: HTTP_METHODS.POST });
+  static put<TResponseData>(path: string, options: TRequestOptions = {}, signal?: AbortSignal) {
+    return HTTPClient.request<TResponseData>(`${HTTPClient.BASE_URL}${path}`, {
+      ...options,
+      method: HTTP_METHODS.PUT,
+    }, signal);
+  }
 
-  put: TRequest = (path, options = {}) =>
-    this.request(this._endpoint + path, { ...options, method: HTTP_METHODS.PUT });
+  static patch<TResponseData>(path: string, options: TRequestOptions = {}, signal?: AbortSignal) {
+    return HTTPClient.request<TResponseData>(`${HTTPClient.BASE_URL}${path}`, {
+      ...options,
+      method: HTTP_METHODS.PATCH,
+    }, signal);
+  }
 
-  patch: TRequest = (path, options = {}) =>
-    this.request(this._endpoint + path, { ...options, method: HTTP_METHODS.PATCH });
+  static delete<TResponseData>(path: string, options: TRequestOptions = {}, signal?: AbortSignal) {
+    HTTPClient.request<TResponseData>(`${HTTPClient.BASE_URL}${path}`, {
+      ...options,
 
-  delete: TRequest = (path, options = {}) =>
-    this.request(this._endpoint + path, { ...options, method: HTTP_METHODS.DELETE });
+      method: HTTP_METHODS.DELETE,
+    }, signal);
+  }
 
   // TODO: Мб добавить timeout и retry по дефолту??
-  request = (url: string, options: TRequestOptions) => {
+  static request<TResponseData>(url: string, options: TRequestOptions, signal?: AbortSignal) {
     const { method = 'GET', data, headers } = options;
 
-    return new Promise<XMLHttpRequest>((resolve, reject) => {
+    log({
+      module: 'HTTP CLIENT',
+      message: `${method} ${url}`,
+    });
+
+    return new Promise<TResponseData>((resolve, reject) => {
       const xhr = new XMLHttpRequest();
 
-      xhr.open(method, url);
+      xhr.withCredentials = true;
+      xhr.responseType = 'json';
 
-      if (headers) {
-        Object.entries(headers).forEach(([key, value]) => {
-          xhr.setRequestHeader(key, value);
-        });
-      }
+      xhr.onabort = reject;
+      xhr.onerror = reject;
+      xhr.ontimeout = reject;
 
       xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) {
@@ -51,21 +76,27 @@ export class HTTPClient {
         }
         else {
           reject(
-            new Error(
-              `[${xhr.status}] Не удалось осуществить запрос: ${
-                xhr.response?.reason || 'Непредвиденная ошибка'
-              }`,
-            ),
+            new HTTPClientError({
+              code: xhr.status,
+              message: xhr.response?.reason || 'Непредвиденная ошибка',
+            }),
           );
         }
       };
 
-      xhr.onabort = reject;
-      xhr.onerror = reject;
-      xhr.ontimeout = reject;
+      if (headers) {
+        Object.entries(headers).forEach(([key, value]) => {
+          xhr.setRequestHeader(key, value);
+        });
+      }
 
-      xhr.withCredentials = true;
-      xhr.responseType = 'json';
+      if (signal) {
+        signal.addEventListener('abort', () => {
+          xhr.abort();
+        });
+      }
+
+      xhr.open(method, url);
 
       if (method === HTTP_METHODS.GET || !data) {
         xhr.send();
@@ -78,5 +109,5 @@ export class HTTPClient {
         xhr.send(JSON.stringify(data));
       }
     });
-  };
+  }
 }

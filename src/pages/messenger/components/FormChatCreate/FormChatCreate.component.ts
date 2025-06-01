@@ -4,15 +4,14 @@ import type {
   TFormChatCreateState,
 } from './types';
 
-import { COMMON_VALIDATIONS } from '../../../../shared/constants/validation';
-
-import { Form } from '../../../../shared/components/Form';
-import { Button } from '../../../../shared/components/Button';
-import { FormField } from '../../../../shared/components/FormField';
-
-import classNames from './FormChatCreate.module.scss';
+import { Button } from '@components/Button';
+import { Form } from '@components/Form';
+import { FormFieldGeneric } from '@components/FormFieldGeneric';
+import { COMMON_VALIDATIONS } from '@constants/validation';
+import iconPlus from '@icons/plus.svg?raw';
 
 import template from './FormChatCreate.hbs';
+import classNames from './FormChatCreate.module.scss';
 
 export class FormChatCreate extends Form<
   TFormChatCreateState,
@@ -22,32 +21,23 @@ export class FormChatCreate extends Form<
   constructor(props: TFormChatCreateProps) {
     super({
       ...props,
-      InputLogin: new FormField({
+      FieldTitle: new FormFieldGeneric({
         labelClassName: 'sr-only',
-        label: 'Логин',
-        name: 'login',
+        label: 'Название чата',
+        name: 'title',
         type: 'text',
-        placeholder: 'Логин',
+        placeholder: 'Введите название чата',
         autocomplete: 'off',
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            login: value,
-          });
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'title');
         },
-        validation: COMMON_VALIDATIONS.login,
+        validation: COMMON_VALIDATIONS.NOT_EMPTY,
       }),
       ButtonCreate: new Button({
         type: 'submit',
         isFull: true,
+        Children: ['Создать чат', iconPlus],
         className: classNames.button,
-        Children: 'Создать',
       }),
     });
   }

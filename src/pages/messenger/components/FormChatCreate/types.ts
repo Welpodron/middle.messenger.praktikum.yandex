@@ -1,15 +1,14 @@
-import type { Button } from '../../../../shared/components/Button';
-import type { FormField } from '../../../../shared/components/FormField';
-
-import type { TFormProps } from '../../../../shared/components/Form';
+import type { Button } from '@components/Button';
+import type { TFormProps } from '@components/Form';
+import type { FormFieldGeneric } from '@components/FormFieldGeneric';
 
 export type TFormChatCreateState = {
-  login: string;
+  title: string;
 };
 
 export type TFormChatCreateProps = TFormProps<TFormChatCreateState>;
 
 export type TFormChatCreateChildren = {
-  InputLogin: FormField;
-  ButtonCreate: Button;
+  FieldTitle: FormFieldGeneric;
+  ButtonCreate: Button<string[]>;
 };

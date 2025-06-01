@@ -1,6 +1,8 @@
+import classNames from './FormChatCreate.module.scss';
+
 export default `
-<form>
-    {{{InputLogin}}}
+<form class="${classNames.root}">
+    {{{FieldTitle}}}
     {{{ButtonCreate}}}
     {{{ErrorText}}}
 </form>`;

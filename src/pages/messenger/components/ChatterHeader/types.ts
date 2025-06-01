@@ -1,11 +1,19 @@
-import type { TUser } from '../../../../shared/types/api';
-
-import type { Avatar } from '../../../../shared/components/Avatar';
+import type { TChat, TUser } from '@app/types/api';
+import type { Avatar } from '@components/Avatar';
+import type { Button } from '@components/Button';
+import type { Drawer } from '@components/Drawer';
+import type { FormChatUsersAdd } from '../FormChatUsersAdd';
+import type { FormChatUsersRemove } from '../FormChatUsersRemove';
 
 export type TChatterHeaderChildren = {
-  AvatarUser: Avatar;
+  AvatarChat: Avatar;
+  ButtonChatActions: Button<string>;
+  DrawerChatActions: Drawer<Button<string[]>[]>;
+  DrawerChatUsersAdd: Drawer<FormChatUsersAdd>;
+  DrawerChatUsersRemove: Drawer<FormChatUsersRemove>;
 };
 
 export type TChatterHeaderProps = {
-  user: TUser;
+  chat?: TChat;
+  user?: TUser;
 };

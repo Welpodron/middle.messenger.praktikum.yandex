@@ -1,44 +1,74 @@
 import type { TSidebarChildren, TSidebarProps } from './types';
 
-import { Block } from '../../../../shared/components/Block';
-import { Link } from '../../../../shared/components/Link';
-import { Avatar } from '../../../../shared/components/Avatar';
-import { Button } from '../../../../shared/components/Button';
-import { ChatsList } from '../ChatsList';
-import { FormChatSearch } from '../FormChatSearch';
+import { Block } from '@components/Block';
+import { Button } from '@components/Button';
+import { Drawer } from '@components/Drawer';
+import { Link } from '@components/Link';
+import { ChatsController } from '@controllers/Chats';
+import iconChevronRight from '@icons/chevron-right.svg?raw';
+import iconPlus from '@icons/plus.svg?raw';
 
-import iconPlus from '../../../../shared/icons/plus.svg?raw';
-
+import { ChatsConnector } from '../ChatsConnector';
+import { FormChatCreate } from '../FormChatCreate';
+import template from './Sidebar.hbs';
 import classNames from './Sidebar.module.scss';
 
-import template from './Sidebar.hbs';
-
-export class Sidebar extends Block<TSidebarProps, TSidebarChildren> {
-  // TODO: В целом в проекте у большинства компонентов в прокси залетают лишние пропсы, которые по факту принадлежат children, а не самому компоненту, нужно в целом пофиксить эту историю
-  constructor(props: TSidebarProps) {
+export class Sidebar extends Block<
+  HTMLElement,
+  TSidebarProps,
+  TSidebarChildren
+> {
+  constructor() {
     super({
-      ...props,
       LinkUser: new Link({
         url: '/settings',
-        Children: new Avatar({
-          picture: props.currentUser.picture,
-        }),
+        Children: ['Профиль', iconChevronRight],
+        className: classNames.link,
       }),
-      ChatsList: new ChatsList({
-        chats: props.chats,
-        onChatClick: props.onChatClick,
+      ChatsConnector: new ChatsConnector(undefined, {
+        displayName: 'ChatsConnector',
       }),
-      FormChatSearch: new FormChatSearch({
-        initialState: {
-          search: '',
-        },
-        onSubmit: props.onSearch,
-      }),
-      ButtonCreateChat: new Button({
+      ButtonChatCreate: new Button({
         type: 'button',
-        Children: iconPlus,
-        className: classNames.buttonCreateChat,
-        onClick: props.onClickCreateChat,
+        Children: ['Создать чат', iconPlus],
+        isFull: true,
+        onClick: () => {
+          this.children.DrawerChatCreate.open();
+        },
+      }),
+      DrawerChatCreate: new Drawer({
+        title: 'Создать чат',
+        position: 'left',
+        Children: new FormChatCreate({
+          onSubmit: (state) => {
+            ChatsController.create({
+              queryParams: state,
+              onBeforeTransaction: () => {
+                this.children.DrawerChatCreate.children.Children?.disable();
+                this.children.DrawerChatCreate.children.Children.children.ButtonCreate.setProps({
+                  isLoading: true,
+                });
+              },
+              onAfterTransaction: () => {
+                this.children.DrawerChatCreate.children.Children?.enable();
+                this.children.DrawerChatCreate.children.Children.children.ButtonCreate.setProps({
+                  isLoading: false,
+                });
+              },
+              onSuccess: () => {
+                this.children.DrawerChatCreate.close();
+                this.children.DrawerChatCreate.children.Children?.reset();
+              },
+              onError: (error) => {
+                this.children.DrawerChatCreate.children.Children?.toggleError(error);
+                this.children.DrawerChatCreate.children.Children?.enable();
+                this.children.DrawerChatCreate.children.Children.children.ButtonCreate.setProps({
+                  isLoading: false,
+                });
+              },
+            });
+          },
+        }),
       }),
     });
   }

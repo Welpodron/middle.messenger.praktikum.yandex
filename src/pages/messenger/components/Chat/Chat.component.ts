@@ -1,27 +1,28 @@
 import type { TChatChildren, TChatProps } from './types';
 
-import { Block } from '../../../../shared/components/Block';
-import { Avatar } from '../../../../shared/components/Avatar';
-import { ChatBackground } from '../ChatBackground';
+import { Avatar } from '@components/Avatar';
+import { Block } from '@components/Block';
+import { Store } from '@modules/Store';
 
 import template from './Chat.hbs';
 
-export class Chat extends Block<TChatProps, TChatChildren> {
+export class Chat extends Block<HTMLButtonElement, TChatProps, TChatChildren> {
   constructor(props: TChatProps) {
     super({
       ...props,
       events: {
         click: () => {
-          // TODO: По факту мб можно прокидывать наверх не айди, а весь чат обратно
-          this.props.onClick?.(this.props.id);
+          Store.set('chat', props.chat);
         },
       },
-      Avatar: new Avatar({
-        picture: props.picture,
-      }),
-      ChatBackground: new ChatBackground({
-        isActive: props.isActive,
-      }),
+      Avatar: new Avatar(
+        {
+          picture: props.chat.avatar,
+        },
+        {
+          displayName: 'ChatAvatar',
+        },
+      ),
     });
   }
 

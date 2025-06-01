@@ -1,20 +1,15 @@
-import type { TUser } from '../../../../shared/types/api';
-
-import type { Link } from '../../../../shared/components/Link';
-import type { Button } from '../../../../shared/components/Button';
-
-import type { ChatsList, TChatsListProps } from '../ChatsList';
-import type { FormChatSearch } from '../FormChatSearch';
+import type { TDynamicObject } from '@app/types/utils';
+import type { Button } from '@components/Button';
+import type { Drawer } from '@components/Drawer';
+import type { Link } from '@components/Link';
+import type { ChatsConnector } from '../ChatsConnector';
+import type { FormChatCreate } from '../FormChatCreate';
 
 export type TSidebarChildren = {
-  LinkUser: Link;
-  FormChatSearch: FormChatSearch;
-  ButtonCreateChat: Button;
-  ChatsList: ChatsList;
+  LinkUser: Link<string[]>;
+  ButtonChatCreate: Button<string[]>;
+  DrawerChatCreate: Drawer<FormChatCreate>;
+  ChatsConnector: ChatsConnector;
 };
 
-export type TSidebarProps = TChatsListProps & {
-  currentUser: TUser;
-  onSearch: (state: { search: string }) => void;
-  onClickCreateChat: () => void;
-};
+export type TSidebarProps = TDynamicObject;

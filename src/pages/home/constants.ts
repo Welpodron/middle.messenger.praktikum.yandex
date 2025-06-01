@@ -9,5 +9,5 @@ export const NAV_LINKS: TNavLink[] = [
   { url: '/settings', text: 'Профиль' },
   { url: '/messenger', text: 'Чат' },
   { url: '/404', text: '404' },
-  { url: '/error', text: '5**' },
+  { url: '/something-wrong', text: '5**' },
 ];

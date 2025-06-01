@@ -1,7 +1,10 @@
 .root {
   display: flex;
   flex-grow: 1;
-  position: relative;
+}
+
+.active {
+  background: var(--colorHighlightPrimary);
 }
 
 .content {
@@ -9,7 +12,6 @@
   align-items: center;
   padding: var(--spacing6x);
   gap: var(--spacing4x);
-  position: relative;
   flex-grow: 1;
 }
 
@@ -70,8 +72,4 @@
   color: var(--colorWhitePrimary);
   border-radius: var(--borderRadiusFull);
   background: var(--colorBrandPrimary);
-}
-
-.chatActive {
-  background: var(--colorHighlightPrimary);
 }

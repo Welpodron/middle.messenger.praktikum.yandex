@@ -1,0 +1,15 @@
+.box {
+  display: grid;
+  max-height: 100vh;
+  height: 100vh;
+  grid-template-rows: max-content minmax(0, 1fr) max-content;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.header {
+  padding: var(--spacing0x) var(--spacing10x);
+}
+
+.footer {
+  padding: var(--spacing0x) var(--spacing10x);
+}

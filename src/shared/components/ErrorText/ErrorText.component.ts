@@ -1,20 +1,12 @@
-import { Block } from '../Block';
-
-import template from './ErrorText.hbs';
-
+import type { TBlockOptions } from '../Block';
 import type { TErrorTextProps } from './types';
 
-export class ErrorText extends Block<TErrorTextProps> {
-  constructor(props: TErrorTextProps) {
-    super(props);
-  }
+import { Block } from '../Block';
+import template from './ErrorText.hbs';
 
-  componentDidUpdate(oldProps: Partial<TErrorTextProps>, newProps: Partial<TErrorTextProps>) {
-    if (oldProps?.error === newProps?.error) {
-      return false;
-    }
-
-    return true;
+export class ErrorText extends Block<HTMLSpanElement, TErrorTextProps> {
+  constructor(props: TErrorTextProps, options?: TBlockOptions) {
+    super(props, options);
   }
 
   render() {

@@ -2,25 +2,23 @@ import classNames from './FormInfoChange.module.scss';
 
 export default `
 <form class="${classNames.form}">
-    {{{ButtonAvatar}}}
     <h2>
-        {{#if currentUser.display_name}}
-            {{currentUser.display_name}}
+        {{#if user.display_name}}
+            {{user.display_name}}
         {{else}}
-            {{currentUser.login}}
+            {{user.login}}
         {{/if}}
     </h2>
-    {{{InputEmail}}}
-    {{{InputLogin}}}
-    {{{InputFirstName}}}
-    {{{InputSecondName}}}
-    {{{InputDisplayName}}}
-    {{{InputPhone}}}
+    <span>ID: {{user.id}}</span>
+    {{{FieldEmail}}}
+    {{{FieldLogin}}}
+    {{{FieldFirstName}}}
+    {{{FieldSecondName}}}
+    {{{FieldDisplayName}}}
+    {{{FieldPhone}}}
     <div class="${classNames.actions}">
         {{{ErrorText}}}
-        {{{ButtonChangeData}}}
-        {{{ButtonChangePassword}}}
-        {{{ButtonLogout}}}
+        {{{ButtonChangeInfo}}}
     </div>
 </form>
 `;

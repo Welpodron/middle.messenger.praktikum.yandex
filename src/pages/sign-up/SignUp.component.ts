@@ -1,32 +1,35 @@
-import type { TDynamicObject } from '../../shared/types/utils';
-
+import type { TDynamicObject } from '@app/types/utils';
 import type { TSignUpChildren } from './types';
 
-import { Block } from '../../shared/components/Block';
+import { Page } from '@components/Page';
+import { AuthController } from '@controllers/Auth';
 
 import { FormSignUp } from './components/FormSignUp';
-
 import { PAGE_TITLE } from './constants';
-
 import template from './SignUp.hbs';
 
-export class SignUp extends Block<TDynamicObject, TSignUpChildren> {
+export class SignUp extends Page<HTMLElement, TDynamicObject, TSignUpChildren> {
   constructor() {
     super({
       FormSignUp: new FormSignUp({
         title: PAGE_TITLE,
-        // TODO: нужно вообще в целом сделать initialState опциональным, чтобы не передавать вот такое вот
-        initialState: {
-          email: '',
-          login: '',
-          first_name: '',
-          second_name: '',
-          phone: '',
-          password: '',
-          password_repeated: '',
-        },
-        onSubmit: async (state) => {
-          console.log(state);
+        onSubmit: (state) => {
+          AuthController.signup({
+            queryParams: state,
+            onBeforeTransaction: () => {
+              this.children.FormSignUp.disable();
+              this.children.FormSignUp.children.ButtonRegister.setProps({
+                isLoading: true,
+              });
+            },
+            onError: (error) => {
+              this.children.FormSignUp.toggleError(error);
+              this.children.FormSignUp.enable();
+              this.children.FormSignUp.children.ButtonRegister.setProps({
+                isLoading: false,
+              });
+            },
+          });
         },
       }),
     });

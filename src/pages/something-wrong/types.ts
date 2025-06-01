@@ -1,4 +1,4 @@
-import type { ErrorSplash } from '../../shared/components/ErrorSplash';
+import type { ErrorSplash } from '@components/ErrorSplash';
 
 export type TSomethingWrongChildren = {
   ErrorSplash: ErrorSplash;

@@ -1,10 +1,27 @@
 import { defineConfig } from 'vite';
 
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 export default defineConfig({
-  root: './src',
+  root: resolve(__dirname, './src'),
   build: {
-    outDir: '../dist',
+    outDir: resolve(__dirname, './dist'),
     emptyOutDir: true,
   },
-  // TODO: Добавить поддержку resolve.alias, т.к уже становится кринж использовать огромные относительные пути
+  resolve: {
+    alias: {
+      '@helpers': resolve(__dirname, './src/shared/helpers'),
+      '@utils': resolve(__dirname, './src/shared/utils'),
+      '@icons': resolve(__dirname, './src/shared/icons'),
+      '@components': resolve(__dirname, './src/shared/components'),
+      '@modules': resolve(__dirname, './src/shared/modules'),
+      '@controllers': resolve(__dirname, './src/shared/controllers'),
+      '@api': resolve(__dirname, './src/shared/api'),
+      '@constants': resolve(__dirname, './src/shared/constants'),
+      '@app/types': resolve(__dirname, './src/shared/types'),
+    },
+  },
 });

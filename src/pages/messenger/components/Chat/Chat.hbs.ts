@@ -1,23 +1,22 @@
 import classNames from './Chat.module.scss';
 
 export default `
-<button type="button" class="${classNames.root}">
-    {{{ChatBackground}}}
+<button type="button" class="{{#trim}}${classNames.root} {{#if isActive}}${classNames.active}{{/if}}{{/trim}}">
     <span class="${classNames.content}">
         {{{Avatar}}}
         <span class="${classNames.info}"> 
-            <span class="${classNames.title}">{{title}}</span>
-            {{#if last_message.content}}
+            <span class="${classNames.title}">{{chat.title}}</span>
+            {{#if chat.last_message.content}}
                 <span class="${classNames.message}">
-                    {{last_message.content}}
+                    {{chat.last_message.content}}
                 </span>
             {{/if}}
         </span>
-        {{#if last_message.time}}
+        {{#if chat.last_message.time}}
             <span class="${classNames.meta}">
-                <span class="${classNames.time}">{{last_message.time}}</span>
-                {{#if unread_counter}}
-                    <span class="${classNames.counter}">{{unread_counter}}</span>
+                <span class="${classNames.time}">{{dater chat.last_message.time}}</span>
+                {{#if chat.unread_count}}
+                    <span class="${classNames.counter}">{{chat.unread_count}}</span>
                 {{/if}}
             </span>
         {{/if}}

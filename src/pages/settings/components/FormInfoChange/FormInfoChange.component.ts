@@ -1,17 +1,15 @@
 import type {
   TFormInfoChangeChildren,
-  TFormInfoChangeState,
   TFormInfoChangeProps,
+  TFormInfoChangeState,
 } from './types';
 
-import { COMMON_VALIDATIONS } from '../../../../shared/constants/validation';
-
-import { Form } from '../../../../shared/components/Form';
-import { FormField } from '../../../../shared/components/FormField';
-import { Button } from '../../../../shared/components/Button';
-import { Avatar } from '../../../../shared/components/Avatar';
-
-import classNames from './FormInfoChange.module.scss';
+import { Button } from '@components/Button';
+import { Form } from '@components/Form';
+import { FormFieldGeneric } from '@components/FormFieldGeneric';
+import { COMMON_VALIDATIONS } from '@constants/validation';
+import iconEdit from '@icons/edit.svg?raw';
+import { deepCompare } from '@utils/deepCompare';
 
 import template from './FormInfoChange.hbs';
 
@@ -21,158 +19,129 @@ export class FormInfoChange extends Form<
   TFormInfoChangeChildren
 > {
   constructor(props: TFormInfoChangeProps) {
+    const { initialState } = props;
+
     super({
       ...props,
-      ButtonAvatar: new Button({
-        type: 'button',
-        isRound: true,
-        className: classNames.avatarButton,
-        onClick: props.onAvatarChangeClick,
-        Children: new Avatar({
-          isLarge: true,
-          picture: props.currentUser.picture,
-        }),
-      }),
-      InputEmail: new FormField({
+      FieldEmail: new FormFieldGeneric({
         label: 'Почта',
         name: 'email',
         type: 'email',
         placeholder: 'pochta@yandex.ru',
         autocomplete: 'email',
-        value: props.initialState.email,
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            email: value,
-          });
+        value: initialState?.email,
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'email');
         },
         validation: COMMON_VALIDATIONS.email,
       }),
-      InputLogin: new FormField({
+      FieldLogin: new FormFieldGeneric({
         label: 'Логин',
         name: 'login',
         type: 'text',
         placeholder: 'ivanivanov',
         autocomplete: 'username',
-        value: props.initialState.login,
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            login: value,
-          });
+        value: initialState?.login,
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'login');
         },
         validation: COMMON_VALIDATIONS.login,
       }),
-      InputFirstName: new FormField({
+      FieldFirstName: new FormFieldGeneric({
         label: 'Имя',
         name: 'first_name',
         type: 'text',
         placeholder: 'Иван',
         autocomplete: 'given-name',
-        value: props.initialState.first_name,
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            first_name: value,
-          });
+        value: initialState?.first_name,
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'first_name');
         },
         validation: COMMON_VALIDATIONS.names,
       }),
-      InputSecondName: new FormField({
+      FieldSecondName: new FormFieldGeneric({
         label: 'Фамилия',
         name: 'second_name',
         type: 'text',
         placeholder: 'Иванов',
         autocomplete: 'family-name',
-        value: props.initialState.second_name,
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            second_name: value,
-          });
+        value: initialState?.second_name,
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'second_name');
         },
         validation: COMMON_VALIDATIONS.names,
       }),
-      InputDisplayName: new FormField({
+      FieldDisplayName: new FormFieldGeneric({
         label: 'Имя в чате',
         name: 'display_name',
         type: 'text',
         placeholder: 'Иван',
         autocomplete: 'username',
-        value: props.initialState.display_name,
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            display_name: value,
-          });
+        value: initialState?.display_name ?? '',
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'display_name');
         },
       }),
-      InputPhone: new FormField({
+      FieldPhone: new FormFieldGeneric({
         label: 'Телефон',
         name: 'phone',
         type: 'text',
         placeholder: '+7 (909) 967 30 30',
         autocomplete: 'tel',
-        value: props.initialState.phone,
-        onChange: (event: Event) => {
-          const value = (event.target as HTMLInputElement).value;
-
-          this.children.ErrorText.setProps({
-            error: undefined,
-          });
-
-          this.setState({
-            ...this.state,
-            phone: value,
-          });
+        value: initialState?.phone,
+        onChange: (event) => {
+          this.updateStateFromEvent(event, 'phone');
         },
         validation: COMMON_VALIDATIONS.phone,
       }),
-      ButtonChangeData: new Button({
+      ButtonChangeInfo: new Button({
         type: 'submit',
-        Children: 'Изменить данные',
-      }),
-      ButtonChangePassword: new Button({
-        type: 'button',
-        onClick: props.onPasswordChangeClick,
-        Children: 'Изменить пароль',
-      }),
-      ButtonLogout: new Button({
-        type: 'button',
-        isDanger: true,
-        Children: 'Выйти',
+        Children: ['Изменить данные', iconEdit],
       }),
     });
+  }
+
+  componentDidUpdate(oldProps: TFormInfoChangeProps, currentProps: TFormInfoChangeProps) {
+    if (deepCompare(oldProps, currentProps)) {
+      return false;
+    }
+
+    const { user } = currentProps;
+
+    this.setState({
+      email: user?.email ?? '',
+      login: user?.login ?? '',
+      first_name: user?.first_name ?? '',
+      second_name: user?.second_name ?? '',
+      display_name: user?.display_name ?? '',
+      phone: user?.phone ?? '',
+    });
+
+    this.children.FieldDisplayName.setProps({
+      value: user?.display_name ?? '',
+    });
+
+    this.children.FieldEmail.setProps({
+      value: user?.email,
+    });
+
+    this.children.FieldLogin.setProps({
+      value: user?.login,
+    });
+
+    this.children.FieldFirstName.setProps({
+      value: user?.first_name,
+    });
+
+    this.children.FieldSecondName.setProps({
+      value: user?.second_name,
+    });
+
+    this.children.FieldPhone.setProps({
+      value: user?.phone,
+    });
+
+    return true;
   }
 
   render() {

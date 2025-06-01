@@ -1,11 +1,15 @@
-import { Block } from '../Block';
-
-import template from './Input.hbs';
-
+import type { TBlockOptions } from '@components/Block';
 import type { TInputProps } from './types';
 
-export class Input extends Block<TInputProps> {
-  constructor(props: TInputProps) {
+import { Inputable } from '../Inputable';
+import template from './Input.hbs';
+
+export class Input<TValue = string> extends Inputable<
+  TValue,
+  HTMLInputElement,
+  TInputProps
+> {
+  constructor(props: TInputProps, options?: TBlockOptions) {
     super({
       ...props,
       events: {
@@ -13,11 +17,21 @@ export class Input extends Block<TInputProps> {
         change: props.onChange,
         input: props.onInput,
       },
-    });
+    }, options);
+  }
+
+  reset() {
+    const element = this.getContent();
+
+    if (!element) {
+      return;
+    }
+
+    element.value = this._props.value ?? '';
   }
 
   get value() {
-    return (this.getContent() as HTMLInputElement)?.value;
+    return this.getContent()?.value as TValue;
   }
 
   render() {

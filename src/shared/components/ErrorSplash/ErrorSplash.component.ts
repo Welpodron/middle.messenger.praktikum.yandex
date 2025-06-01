@@ -1,11 +1,10 @@
+import type { TErrorSplashChildren, TErrorSplashProps } from './types';
+
 import { Block } from '../Block';
 import { Link } from '../Link';
-
 import template from './ErrorSplash.hbs';
 
-import type { TErrorSplashProps, TErrorSplashChildren } from './types';
-
-export class ErrorSplash extends Block<TErrorSplashProps, TErrorSplashChildren> {
+export class ErrorSplash extends Block<HTMLDivElement, TErrorSplashProps, TErrorSplashChildren> {
   constructor(props: TErrorSplashProps) {
     super({
       ...props,
