@@ -1,5 +1,9 @@
+:root {
+  --asideWidth: 310px;
+}
+
 .page {
   display: grid;
-  grid-template-columns: 310px 1fr;
+  grid-template-columns: var(--asideWidth) 1fr;
   min-height: 100vh;
 }

@@ -8,6 +8,7 @@
   --colorBlackPrimary: #000000;
   --colorDangerPrimary: #ff0000;
   --colorErrorPrimary: #ff2f2f;
+  --colorSuccessPrimary: #00fa68;
   --colorHighlightPrimary: #e4edfd;
 
   /* shadows */
@@ -48,5 +49,14 @@
   --fontSizeM: 18px;
   --fontSizeL: 20px;
   --fontSizeXl: 32px;
-  --fontSizeXxl: 42px;
+  --fontSizeXxl: 34px;
+
+  /* animations */
+  --animate-spin: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

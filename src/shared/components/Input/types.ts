@@ -13,6 +13,7 @@ export type TInputProps = {
     | 'url'
     | 'file'
     | (string & {});
+  accept?: string;
   name: string;
   value?: string;
   autocomplete?: AutoFill;

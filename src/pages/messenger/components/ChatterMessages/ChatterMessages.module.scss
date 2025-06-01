@@ -1,0 +1,49 @@
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing6x);
+  overflow-y: auto;
+  padding: var(--spacing6x) var(--spacing10x);
+  position: relative;
+
+  &::-webkit-scrollbar {
+    background: transparent;
+    width: var(--spacing4x);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--colorGreySecondary);
+    border-radius: var(--borderRadiusXs);
+  }
+}
+
+.message {
+  display: grid;
+  justify-items: start;
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing4x);
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  left: var(--spacing0x);
+  z-index: 1;
+  top: var(--spacing0x);
+}
+
+.button {
+  padding: var(--spacing2x) var(--spacing4x);
+  border-radius: var(--borderRadiusXxl);
+  font-size: var(--fontSizeXxs);
+  gap: var(--spacing2x);
+  background: var(--colorHighlightPrimary);
+  color: var(--colorBlackPrimary);
+  line-height: 1;
+
+  & svg {
+    width: var(--spacing10x);
+    height: var(--spacing10x);
+  }
+}

@@ -8,8 +8,3 @@ export type TRequestOptions = {
   timeout?: number;
   retries?: number;
 };
-
-export type TRequest = (
-  path: string,
-  options?: TRequestOptions
-) => Promise<XMLHttpRequest>;

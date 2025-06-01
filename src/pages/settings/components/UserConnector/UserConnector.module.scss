@@ -1,0 +1,39 @@
+.root {
+  display: grid;
+  padding: var(--spacing10x);
+  place-content: center;
+  gap: var(--spacing8x);
+}
+
+.avatarButton {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  padding: var(--spacing0x);
+  background: none;
+  border: none;
+  justify-self: center;
+
+  &::after {
+    content: "Поменять аватар";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    left: var(--spacing0x);
+    top: var(--spacing0x);
+    width: 100%;
+    height: 100%;
+    border-radius: var(--borderRadiusFull);
+    background: var(--colorBlackPrimary);
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    font-size: var(--fontSizeXs);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    opacity: 0.8;
+  }
+}

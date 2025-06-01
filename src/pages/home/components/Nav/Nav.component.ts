@@ -9,7 +9,10 @@ export class Nav extends Block<HTMLElement, TNavProps, TNavChildren> {
   constructor(props: TNavProps) {
     super({
       ...props,
-      Links: props.links.map(({ url, text }) => new Link({ url, Children: text })),
+      Links: props.links.map(
+        ({ url, text }) =>
+          new Link({ url, Children: text }),
+      ),
     });
   }
 

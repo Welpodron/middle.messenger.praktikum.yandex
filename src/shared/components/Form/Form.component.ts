@@ -1,32 +1,30 @@
 import type { TDynamicObject } from '@app/types/utils';
+import type { TFormChildren, TFormProps } from './types';
+
+import { Inputable } from '@components/Inputable';
 
 import { Block } from '../Block';
 import { ErrorText } from '../ErrorText';
 import { Validatable } from '../Validatable';
-
-import type { TFormProps, TFormChildren } from './types';
 
 export abstract class Form<
   TState extends TDynamicObject,
   TProps extends TFormProps<TState>,
   TChildren,
 > extends Block<HTMLFormElement, TProps, TChildren & TFormChildren> {
-  // ref аналог
-  isDisabled = false;
-
-  // НЕ реактивное состояние формы (ref аналог), которое будет передано в onSubmit и просто хранит в себе значения полей формы, чтобы не передавать рефы input элементам, позволяет НЕ ререндерить вообще всю форму при изменении одного поля, аналог uncontrolled полей в реакте
-  // TODO: В целом можно не делать это поле, а в onSubmit передавать FormData???
-  // TODO: В случае если все же делать state реактивным, то нужно подумать что делать с внутренними элементами, так как чендж такого стейта полностью перерендерит шаблон hbs и элементы будут заменены с их event listeners
-  state: TState;
+  protected _isDisabled = false;
+  protected _state: TState;
 
   constructor(props: TProps & TChildren) {
     super({
       ...props,
       events: {
-        submit: async (event: SubmitEvent) => {
+        submit: (event: SubmitEvent) => {
           event.preventDefault();
 
-          if (this.isDisabled) {
+          this.toggleError();
+
+          if (this._isDisabled) {
             return;
           }
 
@@ -34,11 +32,7 @@ export abstract class Form<
             return;
           }
 
-          this.disable();
-
-          await this.props.onSubmit(this.state);
-
-          this.enable();
+          this._props.onSubmit(this._state);
         },
       },
       ErrorText: new ErrorText({
@@ -46,14 +40,16 @@ export abstract class Form<
       }),
     });
 
-    this.state = this.props.initialState ?? ({} as TState);
+    this._state = this._props.initialState ?? ({} as TState);
   }
 
   updateState<TKey extends keyof TState>(value: TState[TKey], field: TKey) {
     this.setState({
-      ...this.state,
+      ...this._state,
       [field]: value,
     });
+
+    this.toggleError();
   }
 
   // Используется как default функция для апдейта state внутри onChange FormField, если нужен другой кейс, то переопределить в наследнике или же вообще не использовать
@@ -64,13 +60,32 @@ export abstract class Form<
   }
 
   setState(newState: TState) {
-    this.state = newState;
+    this._state = newState;
   }
 
   validate() {
     return !Object.values(this.children).some(
       child => child instanceof Validatable && !child.validate(),
     );
+  }
+
+  reset() {
+    this.setState(this._props.initialState ?? ({} as TState));
+
+    Object.values(this.children).forEach((child) => {
+      if (child instanceof Validatable) {
+        child.reset();
+        child.children.Input.reset();
+      }
+
+      if (child instanceof Inputable) {
+        child.reset();
+      }
+    });
+
+    this.toggleError();
+
+    this.enable();
   }
 
   toggleError(message?: string) {
@@ -80,10 +95,10 @@ export abstract class Form<
   }
 
   disable() {
-    this.isDisabled = true;
+    this._isDisabled = true;
   }
 
   enable() {
-    this.isDisabled = false;
+    this._isDisabled = false;
   }
 }

@@ -1,29 +1,41 @@
-// Потенциальные типы ответов от сервера
-// TODO: заменить когда будет известно что реально отдают ручки с бэка
-
 export type TUser = {
-  id: string;
+  id: number;
+  first_name: string;
+  second_name: string;
+  display_name: string | null;
   login: string;
   email: string;
   phone: string;
-  first_name: string;
-  second_name: string;
-  display_name?: string;
-  picture?: string;
+  avatar: string | null;
 };
 
-export type TMessage = {
+export type TChatUser = Omit<TUser, 'email' | 'phone'> & {
+  role: 'admin' | 'regular';
+};
+
+export type TLastMessage = {
   id: string;
   content: string;
   time: string;
-  author: TUser;
+  user?: TUser;
+};
+
+export type TMessage = {
+  id: number;
+  user_id: number;
+  chat_id: number;
+  type: string;
+  time: string;
+  content: string;
+  is_read: boolean;
+  file: string | null;
 };
 
 export type TChat = {
-  id: string;
+  id: number;
+  created_by: number;
   title: string;
-  picture?: string;
-  unread_counter?: number;
-  last_message: TMessage;
-  messages: TMessage[];
+  avatar: string | null;
+  unread_counter: number;
+  last_message: TLastMessage | null;
 };

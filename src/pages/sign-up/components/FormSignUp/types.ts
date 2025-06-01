@@ -1,8 +1,7 @@
 import type { Button } from '@components/Button';
-import type { Link } from '@components/Link';
-import type { FormFieldGeneric } from '@components/FormFieldGeneric';
-
 import type { TFormProps } from '@components/Form';
+import type { FormFieldGeneric } from '@components/FormFieldGeneric';
+import type { Link } from '@components/Link';
 
 export type TFormSignUpState = {
   email: string;
@@ -11,7 +10,6 @@ export type TFormSignUpState = {
   second_name: string;
   phone: string;
   password: string;
-  password_repeated: string;
 };
 
 export type TFormSignUpProps = TFormProps<TFormSignUpState> & {
@@ -25,7 +23,6 @@ export type TFormSignUpChildren = {
   FieldSecondName: FormFieldGeneric;
   FieldPhone: FormFieldGeneric;
   FieldPassword: FormFieldGeneric;
-  FieldPasswordRepeated: FormFieldGeneric;
-  ButtonRegister: Button;
-  LinkLogin: Link;
+  ButtonRegister: Button<string[]>;
+  LinkLogin: Link<string>;
 };

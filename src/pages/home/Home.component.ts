@@ -1,14 +1,12 @@
 import type { THomeChildren, THomeProps } from './types';
 
-import { Block } from '@components/Block';
+import { Page } from '@components/Page';
 
 import { Nav } from './components/Nav';
-
-import { PAGE_TITLE, PAGE_DESCRIPTION, NAV_LINKS } from './constants';
-
+import { NAV_LINKS, PAGE_DESCRIPTION, PAGE_TITLE } from './constants';
 import template from './Home.hbs';
 
-export class Home extends Block<HTMLElement, THomeProps, THomeChildren> {
+export class Home extends Page<HTMLElement, THomeProps, THomeChildren> {
   constructor() {
     super({
       title: PAGE_TITLE,

@@ -1,18 +1,16 @@
+import type { Button } from '@components/Button';
 import type { TFormProps } from '@components/Form';
 import type { FormFieldGeneric } from '@components/FormFieldGeneric';
-import type { Button } from '@components/Button';
 
 export type TFormPasswordChangeState = {
-  password: string;
-  new_password: string;
-  new_password_repeated: string;
+  oldPassword: string;
+  newPassword: string;
 };
 
 export type TFormPasswordChangeProps = TFormProps<TFormPasswordChangeState>;
 
 export type TFormPasswordChangeChildren = {
-  FieldPassword: FormFieldGeneric;
+  FieldOldPassword: FormFieldGeneric;
   FieldNewPassword: FormFieldGeneric;
-  FieldNewPasswordRepeated: FormFieldGeneric;
-  ButtonChangePassword: Button;
+  ButtonChangePassword: Button<string[]>;
 };

@@ -1,5 +1,4 @@
-import type { TBlockChildren } from '../Block';
-
+import type { TBlockChildren, TBlockOptions } from '../Block';
 import type { Inputable } from '../Inputable';
 import type { TValidatableChildren, TValidatableProps } from './types';
 
@@ -13,22 +12,43 @@ export abstract class Validatable<
   TProps extends TValidatableProps<TValue>,
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   TChildren extends TBlockChildren = {},
-> extends Block<TRootElement, TProps, TChildren & TValidatableChildren<TInput>> {
-  constructor(props: TProps & TChildren & Pick<TValidatableChildren<TInput>, 'Input'>) {
-    super({
-      ...props,
-      ErrorText: new ErrorText({
-        error: props.error,
-      }),
+> extends Block<
+    TRootElement,
+    TProps,
+  TChildren & TValidatableChildren<TInput>
+  > {
+  constructor(
+    props: TProps & TChildren & Pick<TValidatableChildren<TInput>, 'Input'>,
+    options?: TBlockOptions,
+  ) {
+    super(
+      {
+        ...props,
+        ErrorText: new ErrorText(
+          {
+            error: props.error,
+          },
+          options?.displayName
+            ? { displayName: `${options.displayName}ErrorText` }
+            : undefined,
+        ),
+      },
+      options,
+    );
+  }
+
+  reset() {
+    this.children.ErrorText.setProps({
+      error: undefined,
     });
   }
 
   validate() {
-    if (!this.props.validation) {
+    if (!this._props.validation) {
       return true;
     }
 
-    const { test, message } = this.props.validation;
+    const { test, message } = this._props.validation;
 
     if (!test(this.children.Input.value as unknown as TValue)) {
       this.children.ErrorText.setProps({

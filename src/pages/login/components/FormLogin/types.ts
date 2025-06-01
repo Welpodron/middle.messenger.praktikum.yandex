@@ -1,8 +1,7 @@
 import type { Button } from '@components/Button';
-import type { Link } from '@components/Link';
-import type { FormFieldGeneric } from '@components/FormFieldGeneric';
-
 import type { TFormProps } from '@components/Form';
+import type { FormFieldGeneric } from '@components/FormFieldGeneric';
+import type { Link } from '@components/Link';
 
 export type TFormLoginState = {
   login: string;
@@ -16,6 +15,6 @@ export type TFormLoginProps = TFormProps<TFormLoginState> & {
 export type TFormLoginChildren = {
   FieldLogin: FormFieldGeneric;
   FieldPassword: FormFieldGeneric;
-  ButtonAuth: Button;
-  LinkRegister: Link;
+  ButtonAuth: Button<string[]>;
+  LinkRegister: Link<string>;
 };

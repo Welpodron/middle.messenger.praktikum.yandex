@@ -1,19 +1,32 @@
-.button {
+.root {
   color: var(--colorWhitePrimary);
   background: var(--colorBrandPrimary);
   padding: var(--spacing4x) var(--spacing10x);
   border-radius: var(--borderRadiusXs);
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.buttonFull {
+.full {
   width: 100%;
 }
 
-.buttonRound {
+.round {
   border-radius: var(--borderRadiusFull);
 }
 
-.buttonDanger {
+.danger {
   background: var(--colorDangerPrimary);
   color: var(--colorWhitePrimary);
+}
+
+.square {
+  padding: var(--spacing4x);
+  justify-content: center;
+}
+
+.loading {
+  cursor: not-allowed;
+  justify-content: center;
 }

@@ -1,15 +1,10 @@
 .aside {
   background: var(--colorWhiteSecondary);
   display: grid;
-  grid-template-rows: 77px 64px calc(100vh - 141px);
-  max-height: 100vh;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: max-content minmax(0, 1fr) max-content;
   height: 100vh;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  padding: var(--spacing6x);
+  max-height: 100vh;
 }
 
 .tools {
@@ -18,6 +13,14 @@
   padding: var(--spacing6x);
 }
 
-.buttonCreateChat {
-  padding: var(--spacing4x);
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing4x) var(--spacing10x);
+  margin: var(--spacing8x);
+  border-radius: var(--borderRadiusXs);
+  background: var(--colorBrandPrimary);
+  color: var(--colorWhitePrimary);
+  text-decoration: none;
 }
