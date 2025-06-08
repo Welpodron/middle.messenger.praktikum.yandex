@@ -4,7 +4,7 @@ export default `
 <div class="${classNames.page}">
     <h1 class="sr-only">{{title}}</h1>
     {{{Sidebar}}}
-    {{{Chatter}}}
-    {{{DialogCreateChat}}}
+    {{{ChatterConnector}}}
+    {{{AlertsConnector}}}
 </div>
 `;

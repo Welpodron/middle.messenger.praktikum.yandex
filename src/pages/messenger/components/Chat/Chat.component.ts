@@ -1,7 +1,8 @@
 import type { TChatChildren, TChatProps } from './types';
 
-import { Block } from '@components/Block';
 import { Avatar } from '@components/Avatar';
+import { Block } from '@components/Block';
+import { Store } from '@modules/Store';
 
 import template from './Chat.hbs';
 
@@ -11,24 +12,18 @@ export class Chat extends Block<HTMLButtonElement, TChatProps, TChatChildren> {
       ...props,
       events: {
         click: () => {
-          // TODO: По факту мб можно прокидывать наверх не айди, а весь чат обратно
-          this.props.onClick?.(this.props.id);
+          Store.set('chat', props.chat);
         },
       },
-      Avatar: new Avatar({
-        picture: props.picture,
-      }),
+      Avatar: new Avatar(
+        {
+          picture: props.chat.avatar,
+        },
+        {
+          displayName: 'ChatAvatar',
+        },
+      ),
     });
-  }
-
-  // Не апдейтим пропсы, а делаем toggle атрибута, чтобы избежать ререндера всего компонента
-  toggle(isActive: boolean) {
-    if (isActive) {
-      this.getContent()?.setAttribute('data-active', '');
-    }
-    else {
-      this.getContent()?.removeAttribute('data-active');
-    }
   }
 
   render() {

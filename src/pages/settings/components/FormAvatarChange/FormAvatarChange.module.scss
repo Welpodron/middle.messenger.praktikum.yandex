@@ -1,3 +1,10 @@
+.root {
+  display: grid;
+  gap: var(--spacing6x);
+  padding: var(--spacing6x);
+  padding-top: var(--spacing0x);
+}
+
 .actions {
   margin-top: var(--spacing8x);
 }

@@ -1,5 +1,5 @@
 import type { TDynamicObject } from '../../types/utils';
-import type { TBlockChildren, TBlockProps } from '../Block';
+import type { TBlockChildren, TBlockOptions, TBlockProps } from '../Block';
 
 import { Block } from '../Block';
 
@@ -10,9 +10,11 @@ export abstract class Inputable<
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   TChildren extends TBlockChildren = {},
 > extends Block<TRootElement, TProps, TChildren> {
-  constructor(props: TBlockProps & TProps & TChildren) {
-    super(props);
+  constructor(props: TBlockProps & TProps & TChildren, options?: TBlockOptions) {
+    super(props, options);
   }
 
+  abstract reset(): void;
   abstract get value(): TValue;
+  abstract set value(value: TValue);
 }

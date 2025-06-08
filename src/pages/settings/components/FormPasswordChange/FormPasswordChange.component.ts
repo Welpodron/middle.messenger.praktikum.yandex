@@ -1,14 +1,14 @@
 import type {
   TFormPasswordChangeChildren,
-  TFormPasswordChangeState,
   TFormPasswordChangeProps,
+  TFormPasswordChangeState,
 } from './types';
 
-import { COMMON_VALIDATIONS } from '@constants/validation';
-
+import { Button } from '@components/Button';
 import { Form } from '@components/Form';
 import { FormFieldGeneric } from '@components/FormFieldGeneric';
-import { Button } from '@components/Button';
+import { COMMON_VALIDATIONS } from '@constants/validation';
+import iconEdit from '@icons/edit.svg?raw';
 
 import template from './FormPasswordChange.hbs';
 
@@ -20,47 +20,33 @@ export class FormPasswordChange extends Form<
   constructor(props: TFormPasswordChangeProps) {
     super({
       ...props,
-      FieldPassword: new FormFieldGeneric({
+      FieldOldPassword: new FormFieldGeneric({
         label: 'Текущий пароль',
         type: 'password',
-        name: 'password',
+        name: 'oldPassword',
         placeholder: '**********',
-        autocomplete: 'current-password',
+        autocomplete: 'off',
         onChange: (event) => {
-          this.updateStateFromEvent(event, 'password');
+          this.updateStateFromEvent(event, 'oldPassword');
         },
         validation: COMMON_VALIDATIONS.NOT_EMPTY,
       }),
       FieldNewPassword: new FormFieldGeneric({
         label: 'Новый пароль',
         type: 'password',
-        name: 'new_password',
+        name: 'newPassword',
         placeholder: '**********',
         autocomplete: 'new-password',
         onChange: (event) => {
-          this.updateStateFromEvent(event, 'new_password');
+          this.updateStateFromEvent(event, 'newPassword');
         },
         validation: COMMON_VALIDATIONS.NOT_EMPTY,
-      }),
-      FieldNewPasswordRepeated: new FormFieldGeneric({
-        label: 'Повторите новый пароль',
-        type: 'password',
-        name: 'new_password_repeated',
-        placeholder: '**********',
-        autocomplete: 'new-password',
-        onChange: (event) => {
-          this.updateStateFromEvent(event, 'new_password_repeated');
-        },
-        validation: {
-          test: value => value === this.state.new_password,
-          message: 'Пароли не совпадают',
-        },
       }),
       ButtonChangePassword: new Button({
         type: 'submit',
         isDanger: true,
         isFull: true,
-        Children: 'Сменить пароль',
+        Children: ['Сменить пароль', iconEdit],
       }),
     });
   }

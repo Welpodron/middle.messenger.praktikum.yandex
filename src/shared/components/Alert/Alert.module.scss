@@ -1,0 +1,37 @@
+.root {
+  padding: var(--spacing4x) var(--spacing6x);
+  background: var(--colorGreySecondary);
+  border-radius: var(--borderRadiusXs);
+  display: flex;
+  margin: var(--spacing4x) var(--spacing0x);
+  align-items: center;
+  width: 280px;
+  justify-content: space-between;
+}
+
+.error {
+  background: var(--colorDangerPrimary);
+  color: var(--colorWhitePrimary);
+}
+
+.success {
+  background: var(--colorSuccessPrimary);
+  color: var(--colorBlackPrimary);
+}
+
+.message {
+  font-weight: 600;
+  line-height: 1;
+  font-size: var(--fontSizeXs);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.buttonClose {
+  padding: var(--spacing0x);
+  margin-left: var(--spacing1x);
+  background: transparent;
+  color: inherit;
+  flex-shrink: 0;
+}

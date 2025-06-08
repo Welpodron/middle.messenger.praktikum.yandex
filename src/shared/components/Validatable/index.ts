@@ -1,2 +1,2 @@
-export { Validatable } from './Validatable.component';
 export * from './types';
+export { Validatable } from './Validatable.component';

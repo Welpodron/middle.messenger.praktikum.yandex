@@ -1,14 +1,14 @@
 import type {
   TFormAvatarChangeChildren,
-  TFormAvatarChangeState,
   TFormAvatarChangeProps,
+  TFormAvatarChangeState,
 } from './types';
 
-import { COMMON_VALIDATIONS } from '@constants/validation';
-
+import { Button } from '@components/Button';
 import { Form } from '@components/Form';
 import { FormFieldGeneric } from '@components/FormFieldGeneric';
-import { Button } from '@components/Button';
+import { COMMON_VALIDATIONS } from '@constants/validation';
+import uploadIcon from '@icons/upload.svg?raw';
 
 import template from './FormAvatarChange.hbs';
 
@@ -25,27 +25,40 @@ export class FormAvatarChange extends Form<
         name: 'avatar',
         type: 'file',
         onChange: (event: Event) => {
-          // TODO: Пока не понятно в каком формате нужно будет отправлять файл на сервер, чекнуть контракты бэка в некст спринтах
           const value = (event.target as HTMLInputElement).files?.[0];
 
           this.children.ErrorText.setProps({
             error: undefined,
           });
 
-          if (value) {
-            this.setState({
-              ...this.state,
-              avatar: value,
-            });
-          }
+          this.children.InputAvatar.validate();
+
+          this.updateState(value ?? null, 'avatar');
         },
-        // TODO: Пока не понятно есть ли ограничения на размер файла и тип файла, чекнуть контракты бэка в некст спринтах
         validation: COMMON_VALIDATIONS.NOT_EMPTY,
+        accept: 'image/png, image/gif, image/jpeg, image/jpg, image/webp',
       }),
       ButtonChangeAvatar: new Button({
         type: 'submit',
-        Children: 'Поменять аватар',
+        isFull: true,
+        Children: ['Поменять аватар', uploadIcon],
       }),
+    });
+  }
+
+  disable() {
+    super.disable();
+
+    this.children.ButtonChangeAvatar.setProps({
+      isLoading: true,
+    });
+  }
+
+  enable() {
+    super.enable();
+
+    this.children.ButtonChangeAvatar.setProps({
+      isLoading: false,
     });
   }
 

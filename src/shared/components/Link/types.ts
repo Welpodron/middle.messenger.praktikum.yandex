@@ -1,7 +1,7 @@
 import type { TBlockChildrenTypes } from '../Block';
 
-export type TLinkChildren = {
-  Children: TBlockChildrenTypes;
+export type TLinkChildren<TChildren extends TBlockChildrenTypes> = {
+  Children: TChildren;
 };
 
 export type TLinkProps = {

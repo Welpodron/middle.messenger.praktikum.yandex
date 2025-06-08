@@ -1,0 +1,13 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100%;
+  gap: var(--spacing6x);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  align-items: start;
+  gap: var(--spacing6x);
+}

@@ -1,6 +1,9 @@
 .header {
-  padding: var(--spacing6x) var(--spacing0x);
+  padding: var(--spacing6x) var(--spacing10x);
   border-bottom: var(--spacing1px) solid var(--colorGreySecondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .info {
@@ -17,4 +20,14 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: 600;
+}
+
+.infoText {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta {
+  font-size: var(--fontSizeXxs);
+  color: var(--colorGreyPrimary);
 }

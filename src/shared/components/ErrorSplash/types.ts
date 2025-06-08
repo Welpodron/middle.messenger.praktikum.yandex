@@ -1,7 +1,7 @@
 import type { Link } from '../Link';
 
 export type TErrorSplashChildren = {
-  LinkBack: Link;
+  LinkBack: Link<string>;
 };
 
 export type TErrorSplashProps = {

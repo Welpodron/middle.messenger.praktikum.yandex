@@ -20,11 +20,15 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": "./src",
     "paths": {
+      "@helpers/*": ["shared/helpers/*"],
       "@utils/*": ["shared/utils/*"],
       "@icons/*": ["shared/icons/*"],
+      "@api/*": ["shared/api/*"],
+      "@modules/*": ["shared/modules/*"],
+      "@controllers/*": ["shared/controllers/*"],
       "@components/*": ["shared/components/*"],
       "@constants/*": ["shared/constants/*"],
-      "@app/types/*": ["shared/types/*"],
+      "@app/types/*": ["shared/types/*"]
     },
     "types": ["vite/client"]
   },

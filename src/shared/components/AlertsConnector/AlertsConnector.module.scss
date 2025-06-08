@@ -1,0 +1,17 @@
+.root {
+  position: fixed;
+  top: var(--spacing0x);
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.alerts {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
