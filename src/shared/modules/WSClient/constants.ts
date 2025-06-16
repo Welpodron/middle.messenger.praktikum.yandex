@@ -9,3 +9,7 @@ export const enum WSClientEvents {
   DISCONNECT = 'disconnect',
   ERROR = 'error',
 }
+
+export const WS_SEND_CONNECT_ERROR = 'Перед отправкой сообщения необходимо создать ws соединение, используя метод connect()';
+export const WS_SEND_NOT_CONNECTED_ERROR = `WebSocket соединение не открыто, текущее состояние: `;
+export const WS_INTERNAL_ERROR = 'Ошибка при взаимодействии с WebSocket сервером';

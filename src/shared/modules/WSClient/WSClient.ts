@@ -1,7 +1,7 @@
 import { EventBus } from '@modules/EventBus';
 import { log } from '@utils/log';
 
-import { BASE_URL, PING_INTERVAL, WSClientEvents } from './constants';
+import { BASE_URL, PING_INTERVAL, WS_INTERNAL_ERROR, WS_SEND_CONNECT_ERROR, WS_SEND_NOT_CONNECTED_ERROR, WSClientEvents } from './constants';
 import { WSClientError } from './errors/WSClientError';
 
 // https://ya-praktikum.tech/api/v2/openapi/ws
@@ -16,6 +16,10 @@ export class WSClient extends EventBus {
     this._path = `${BASE_URL}${entrypoint}`;
   }
 
+  get socket() {
+    return this._socket;
+  }
+
   send(data: unknown) {
     log({
       module: 'WS',
@@ -25,7 +29,7 @@ export class WSClient extends EventBus {
     if (!this._socket) {
       throw new WSClientError(
         {
-          message: 'Перед отправкой сообщения необходимо создать ws соединение, используя метод connect',
+          message: WS_SEND_CONNECT_ERROR,
         },
       );
     }
@@ -33,7 +37,7 @@ export class WSClient extends EventBus {
     if (this._socket.readyState !== WebSocket.OPEN) {
       throw new WSClientError(
         {
-          message: `WebSocket соединение не открыто, текущее состояние: ${this._socket.readyState}`,
+          message: `${WS_SEND_NOT_CONNECTED_ERROR} ${this._socket.readyState}`,
         },
       );
     }
@@ -47,6 +51,14 @@ export class WSClient extends EventBus {
     this.clear();
 
     this._socket?.close();
+  }
+
+  startPooling() {
+    clearInterval(this._interval);
+
+    this._interval = setInterval(() => {
+      this.send({ type: 'ping' });
+    }, PING_INTERVAL);
   }
 
   connect() {
@@ -73,7 +85,7 @@ export class WSClient extends EventBus {
         this.emit(WSClientEvents.ERROR, event);
 
         reject(new WSClientError({
-          message: 'Ошибка при взаимодействии с WebSocket сервером',
+          message: WS_INTERNAL_ERROR,
         }));
       };
 
@@ -115,9 +127,7 @@ export class WSClient extends EventBus {
           message: ['Открыто ws соединение', event, this._socket],
         });
 
-        this._interval = setInterval(() => {
-          this.send({ type: 'ping' });
-        }, PING_INTERVAL);
+        this.startPooling();
 
         this.emit(WSClientEvents.CONNECT, event);
 

@@ -2,8 +2,11 @@ import type { Route } from '@components/Route';
 
 import { log } from '@utils/log';
 
+import { ROUTER_MOUNT_ERROR, ROUTER_ROOT_ELEMENT_ID, ROUTER_START_ERROR } from './constants';
+import { RouterError } from './errors/RouterError';
+
 class _Router {
-  private _currentRoute: Route | null = null;
+  private _currentRoute: { path: string; route: Route } | null = null;
   private _routes: Record<string, Route> = {};
   private _rootElement: Element | null = null;
   private _isStarted = false;
@@ -13,13 +16,21 @@ class _Router {
   }
 
   private async _route(path: string) {
+    if (!this._isStarted) {
+      throw new RouterError({
+        message: ROUTER_START_ERROR,
+      });
+    }
+
     log({
       module: 'ROUTER',
       message: `ROUTING TO: ${path}`,
     });
 
     if (!this._rootElement) {
-      throw new Error('Не найден root элемент для роутинга');
+      throw new RouterError({
+        message: ROUTER_MOUNT_ERROR,
+      });
     }
 
     const Route = this._routes[path] ?? this._routes['*'];
@@ -29,13 +40,13 @@ class _Router {
     }
 
     if (this._currentRoute) {
-      this._currentRoute.leave();
+      this._currentRoute.route.leave();
     }
 
-    this._currentRoute = Route;
+    this._currentRoute = { path, route: Route };
 
     // render не обязан вернуть элемент, если конкретный route не вернул ничего (допустим если не хватает прав и тд)
-    const element = await this._currentRoute.render();
+    const element = await this._currentRoute.route.render();
 
     if (!element) {
       return;
@@ -49,20 +60,32 @@ class _Router {
       message: `ENTERED: ${path}`,
     });
 
-    this._currentRoute.mount();
+    this._currentRoute.route.mount();
   }
 
   async go(path: string, state?: unknown) {
+    if (!this._isStarted) {
+      throw new RouterError({
+        message: ROUTER_START_ERROR,
+      });
+    }
+
     window.history.pushState(state, '', path);
 
     await this._route(path);
   }
 
   redirect(path: string) {
+    if (!this._isStarted) {
+      throw new RouterError({
+        message: ROUTER_START_ERROR,
+      });
+    }
+
     window.location.replace(path);
   }
 
-  async start(path: string) {
+  async start(startingPath?: string) {
     if (this._isStarted) {
       return;
     }
@@ -70,10 +93,17 @@ class _Router {
     this._isStarted = true;
 
     window.onpopstate = async () => {
+      log({
+        module: 'ROUTER',
+        message: `STATE_CHANGE_TO: ${window.location.pathname}`,
+      });
+
       await this._route(window.location.pathname);
     };
 
-    await this._route(path);
+    if (startingPath) {
+      await this._route(startingPath);
+    }
   }
 
   use(path: string, route: Route) {
@@ -82,13 +112,47 @@ class _Router {
     return this;
   }
 
+  get currentRoute() {
+    return this._currentRoute;
+  }
+
+  get routes() {
+    return this._routes;
+  }
+
+  get rootElement() {
+    return this._rootElement;
+  }
+
+  stop() {
+    this._isStarted = false;
+
+    this._currentRoute = null;
+
+    this._routes = {};
+
+    window.onpopstate = null;
+  }
+
   back() {
+    if (!this._isStarted) {
+      throw new RouterError({
+        message: ROUTER_START_ERROR,
+      });
+    }
+
     window.history.back();
   }
 
   forward() {
+    if (!this._isStarted) {
+      throw new RouterError({
+        message: ROUTER_START_ERROR,
+      });
+    }
+
     window.history.forward();
   }
 }
 
-export const Router = new _Router(document.getElementById('root')!);
+export const Router = new _Router(document.getElementById(ROUTER_ROOT_ELEMENT_ID)!);

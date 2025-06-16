@@ -1,0 +1,7 @@
+{
+  "extension": ["ts"],
+  "loader": "./mocha-loader.mjs",
+  "require": "./mocha-setup.mjs",
+  "es-module-specifier-resolution": "node",
+  "spec": "./src/**/*.test.ts"
+}
