@@ -26,8 +26,6 @@ export class Route {
 
     this._blockInstance = new this._blockClass();
 
-    this._blockInstance.init();
-
     return this._blockInstance.getContent();
   }
 }
