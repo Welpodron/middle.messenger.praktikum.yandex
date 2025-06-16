@@ -21,6 +21,8 @@ globalThis.document = jsdom.window.document;
 
 if (!originalCrypto) {
   Object.defineProperty(globalThis, 'crypto', {
+    configurable: true,
+    writable: true,
     value: { getRandomValues: randomFillSync },
   });
 }
