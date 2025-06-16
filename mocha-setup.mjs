@@ -30,7 +30,9 @@ export const mochaHooks = {
     globalThis.window = originalWindow;
     globalThis.document = originalDocument;
     if (!originalCrypto) {
-      Object.defineProperty(globalThis, 'crypto', originalCrypto);
+      Object.defineProperty(globalThis, 'crypto', {
+        value: undefined,
+      });
     }
   },
 };
