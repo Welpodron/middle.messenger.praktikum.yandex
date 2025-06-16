@@ -73,7 +73,6 @@ class _ChatterConnector extends Block<
   componentWillUnmount() {
     ChatsController.disconnect();
     this._scrollPosition = null;
-    console.error(this._scrollPosition);
   }
 
   componentDidUpdate(

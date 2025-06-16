@@ -22,8 +22,6 @@ export class Link<TChildren extends TBlockChildrenTypes> extends Block<
           click: (event) => {
             event.preventDefault();
 
-            console.log('Link clicked', this._props.url);
-
             Router.go(this._props.url);
           },
         },
