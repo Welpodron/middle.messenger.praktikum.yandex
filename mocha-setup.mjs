@@ -18,19 +18,19 @@ const jsdom = new JSDOM(
 
 globalThis.window = jsdom.window;
 globalThis.document = jsdom.window.document;
-Object.defineProperty(globalThis, 'crypto', {
-  value: { getRandomValues: randomFillSync },
-});
+
+if (!originalCrypto) {
+  Object.defineProperty(globalThis, 'crypto', {
+    value: { getRandomValues: randomFillSync },
+  });
+}
 
 export const mochaHooks = {
   afterAll() {
     globalThis.window = originalWindow;
     globalThis.document = originalDocument;
-    if (originalCrypto) {
-      Object.defineProperty(globalThis, 'crypto', Object.getOwnPropertyDescriptors(originalCrypto));
-    }
-    else {
-      globalThis.crypto = originalCrypto;
+    if (!originalCrypto) {
+      Object.defineProperty(globalThis, 'crypto', originalCrypto);
     }
   },
 };
