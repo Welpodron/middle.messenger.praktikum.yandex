@@ -30,7 +30,7 @@
       "@constants/*": ["shared/constants/*"],
       "@app/types/*": ["shared/types/*"]
     },
-    "types": ["vite/client"]
+    "types": ["vite/client", "mocha", "chai-as-promised"]
   },
   "include": ["src"]
 }
