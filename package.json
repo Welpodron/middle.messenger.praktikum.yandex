@@ -10,7 +10,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "@commitlint/prompt-cli": "^19.8.1",
+    "@commitlint/cz-commitlint": "^19.8.1",
     "@eslint/js": "^9.20.0",
     "@stylistic/eslint-plugin": "^4.1.0",
     "@stylistic/stylelint-config": "^2.0.0",
@@ -23,6 +23,7 @@
     "autoprefixer": "^10.4.20",
     "chai": "^5.2.0",
     "chai-as-promised": "^8.0.1",
+    "commitizen": "^4.3.1",
     "cssnano": "^7.0.6",
     "eslint": "^9.20.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
@@ -60,6 +61,11 @@
     "ts:check": "tsc --noEmit",
     "test": "mocha",
     "prepare": "husky",
-    "commit": "commit"
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
   }
 }
