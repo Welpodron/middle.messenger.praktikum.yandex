@@ -8,6 +8,9 @@
   "license": "UNLICENSED",
   "type": "module",
   "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/prompt-cli": "^19.8.1",
     "@eslint/js": "^9.20.0",
     "@stylistic/eslint-plugin": "^4.1.0",
     "@stylistic/stylelint-config": "^2.0.0",
@@ -56,6 +59,7 @@
     "lint:styles": "npx stylelint ./src/**/*.scss --fix",
     "ts:check": "tsc --noEmit",
     "test": "mocha",
-    "prepare": "husky"
+    "prepare": "husky",
+    "commit": "commit"
   }
 }
